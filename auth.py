@@ -11,7 +11,7 @@ def login_user():
     if "login" not in st.session_state:
         st.session_state.login = False
         st.session_state.role = None
-        st.session_state.username = None  # Identifica al usuario logueado
+        st.session_state.username = None
 
     # Si ya está logueado, no mostrar el formulario de login
     if st.session_state.login:
@@ -22,15 +22,18 @@ def login_user():
     username = st.text_input("Usuario", key="username_input")
     password = st.text_input("Contraseña", type="password", key="password_input")
 
-    if st.button("Iniciar sesión"):
+    login_clicked = st.button("Iniciar sesión")
+
+    if login_clicked:
         if username in USERS and USERS[username]["password"] == password:
             st.session_state.login = True
             st.session_state.role = USERS[username]["role"]
             st.session_state.username = username
-            st.experimental_rerun()  # Limpia el formulario y actualiza la vista
         else:
             st.error("Usuario o contraseña incorrectos")
-    return False
+
+    # Controlar el flujo según el estado
+    return st.session_state.login
 
 def get_role():
     """Devuelve el rol del usuario logueado."""
@@ -41,4 +44,3 @@ def logout():
     st.session_state.login = False
     st.session_state.role = None
     st.session_state.username = None
-    st.experimental_rerun()  # Refresca automáticamente tras logout
