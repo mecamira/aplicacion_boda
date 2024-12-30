@@ -4,8 +4,8 @@ import auth  # Importa las funciones de autenticación
 
 # Configuración de la página debe ser la primera instrucción
 st.set_page_config(
-    page_title="Boda de Alejandro y [Nombre de tu pareja]",
-    layout="wide"
+    page_title="Boda de Alejandro y Noemi",
+    layout="centered"
 )
 
 # Estado de sesión para el login

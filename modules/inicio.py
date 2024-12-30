@@ -4,12 +4,6 @@ from datetime import datetime
 import pandas as pd
 import os
 
-# Configuración de la página
-st.set_page_config(
-    page_title="Boda de Alejandro y [Nombre de tu pareja]",
-    layout="centered"
-)
-
 def run():
     # Encabezado Principal
     st.title("¡Estás invitado a nuestra boda! 💍")
