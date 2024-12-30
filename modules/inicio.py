@@ -8,105 +8,46 @@ import base64
 
 # Suavizar la imagen de fondo
 def prepare_background():
-    # Cargar la imagen
     image_path = "assets/eucalyptus_background.jpg"
     background = Image.open(image_path)
-
-    # Reducir la opacidad
     enhancer = ImageEnhance.Brightness(background)
     softened_background = enhancer.enhance(1.1)
-    
-    # Guardar la imagen modificada
     softened_path = "assets/softened_eucalyptus_background.jpg"
     softened_background.save(softened_path)
     return softened_path
 
 # Aplicar estilo personalizado con fondo y textos
 def add_custom_styles(background_path):
-    # Leer la imagen y convertirla a base64
     with open(background_path, "rb") as image_file:
         base64_image = base64.b64encode(image_file.read()).decode()
-
-    # Aplicar el fondo y estilos con Google Fonts
     st.markdown(
         f"""
         <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
-
         .stApp {{
             background-image: url("data:image/jpg;base64,{base64_image}");
             background-size: cover;
             background-attachment: fixed;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            text-align: center; /* Centrar todo el contenido */
             font-family: 'Dancing Script', cursive;
         }}
         h1 {{
-            color: #000000 !important; /* Forzar negro para encabezados */
-            font-family: 'Dancing Script', cursive;
-            font-size: 64px; /* Tamaño en píxeles */
+            color: #000000 !important;
+            font-size: 64px;
         }}
         h2 {{
-            color: #000000 !important; /* Forzar negro para encabezados */
-            font-family: 'Dancing Script', cursive;
-            font-size: 48px; /* Tamaño en píxeles */
+            color: #000000 !important;
+            font-size: 48px;
         }}
-        p, label, .stMarkdown {{
-            color: #000000; /* Color negro para textos generales */
-            font-family: 'Dancing Script', cursive;
-            font-size: 24px; /* Tamaño en píxeles */
-        }}
-        .stTextInput > div > div > input {{
-            background-color: white;
-            border: 1px solid #ccc;
+        .normal-text {{
+            font-size: 15px;
             color: #000000;
-            font-family: 'Dancing Script', cursive;
-        }}
-        .stTextArea > div > textarea {{
-            background-color: white;
-            border: 1px solid #ccc;
-            color: #000000;
-            font-family: 'Dancing Script', cursive;
-        }}
-        .stRadio > div {{
-            color: #000000; /* Ajuste de opciones de radio */
-            font-family: 'Dancing Script', cursive;
-        }}
-        .stButton > button {{
-            background-color: #5A9;
-            color: white;
-            border-radius: 8px;
-            border: none;
-            font-family: 'Dancing Script', cursive;
-            font-size: 20px; /* Tamaño en píxeles */
-        }}
-        .stButton > button:disabled {{
-            background-color: #ccc;
-            color: #666;
-            font-family: 'Dancing Script', cursive;
-        }}
-        .stExpander {{
-            background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco translúcido */
-            border-radius: 8px;
-            color: #000000;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2); /* Sombra para destacar */
-            font-family: 'Dancing Script', cursive;
-            font-size: 24px; /* Tamaño en píxeles */
-        }}
-        .separador {{
-            width: 100%;
-            height: 2px;
-            background-color: #8B4513; /* Marrón otoñal */
-            margin: 8px 0;
+            text-align: center;
         }}
         .circular-image {{
             display: block;
             margin: 0 auto;
             border-radius: 50%;
-            width: 350px; /* Tamaño de imagen ajustado */
+            width: 350px;
             height: 350px;
             object-fit: cover;
         }}
@@ -116,10 +57,7 @@ def add_custom_styles(background_path):
     )
 
 def run():
-    # Preparar el fondo suavizado
     softened_background_path = prepare_background()
-
-    # Aplicar fondo y estilos personalizados
     add_custom_styles(softened_background_path)
 
     # Encabezado Principal
@@ -134,9 +72,10 @@ def run():
     except FileNotFoundError:
         st.error("No se encontró la imagen principal. Asegúrate de que 'assets/Foto_principal.jpeg' exista.")
 
+    # Texto de introducción
     st.markdown(
         f"""
-        <div style="font-size: 28px; font-family: 'Dancing Script', cursive; color: #000000; text-align: center;">
+        <div class="normal-text">
             ¡Que sí! ¡Que nos casamos! Estamos muy felices de compartir con vosotros cada momento de nuestro día especial. Por eso estamos preparando una boda que será para recordar.
             <br><br>
             Mientras llega el gran día, hemos creado esta app con varias secciones para que estés al día de todo.
@@ -155,65 +94,56 @@ def run():
     fecha_boda = datetime(2026, 6, 13, 12, 0, 0)
     dias_restantes = (fecha_boda - datetime.now()).days
 
-    # Separador superior
     st.markdown('<div class="separador"></div>', unsafe_allow_html=True)
-
-    # Texto estilizado
     st.markdown(
         f"""
-        <p style="color: #8B4513; font-size: 2.0em; font-weight: bold;">
-            ¡Faltan <span style="font-size: 2.0em;">{dias_restantes}</span> días para el gran día!
-        </p>
+        <div style="color: #8B4513; font-size: 24px; font-weight: bold; text-align: center;">
+            ¡Faltan <span style="font-size: 32px;">{dias_restantes}</span> días para el gran día!
+        </div>
         """,
         unsafe_allow_html=True
     )
-
-    # Separador inferior
     st.markdown('<div class="separador"></div>', unsafe_allow_html=True)
 
     # Información del Evento
     st.header("Detalles del Evento")
-
-    # Ceremonia
-    st.write("**⛪ Ceremonia:**")
-    st.write("**Lugar:** Iglesia San Pedro de los Arcos, Oviedo.")
-    st.write("[Ver en Google Maps](https://www.google.com/maps/place/Iglesia+de+San+Pedro+de+los+Arcos/@43.3672191,-5.8628094,1660m/data=!3m2!1e3!4b1!4m6!3m5!1s0xd368d023a71211f:0x17b0a2a66f4e2e75!8m2!3d43.3672153!4d-5.8579385!16s%2Fg%2F12lnh3l3y?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D)")
+    st.markdown(
+        f"""
+        <div class="normal-text">
+            <b>⛪ Ceremonia:</b> Iglesia San Pedro de los Arcos, Oviedo.
+            <br>
+            <a href="https://www.google.com/maps/place/Iglesia+de+San+Pedro+de+los+Arcos/" target="_blank">Ver en Google Maps</a>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
     try:
         imagen_iglesia = Image.open("assets/iglesia_san_pedro.jpg")
-        # Convertimos la imagen a base64
         buffered = BytesIO()
         imagen_iglesia.save(buffered, format="JPEG")
         img_str = base64.b64encode(buffered.getvalue()).decode()
-        # Renderizamos la imagen circular
-        st.markdown(
-            f"""
-            <img src="data:image/jpeg;base64,{img_str}" class="circular-image">
-            """,
-            unsafe_allow_html=True
-        )
+        st.markdown(f"""<img src="data:image/jpeg;base64,{img_str}" class="circular-image">""", unsafe_allow_html=True)
     except FileNotFoundError:
-        st.error("No se encontró la imagen de la iglesia. Asegúrate de que 'assets/iglesia_san_pedro.jpg' exista.")
+        st.error("No se encontró la imagen de la iglesia.")
 
-    # Banquete
-    st.write("")    
-    st.write("**🏰 Banquete:**")
-    st.write("**Lugar:** Hotel Reconquista, Oviedo.")
-    st.write("[Ver en Google Maps](https://www.google.com/maps/place/Eurostars+Hotel+de+La+Reconquista/@43.3630968,-5.8564535,830m/data=!3m1!1e3!4m9!3m8!1s0xd368cfd2a506959:0x5204d03f5e4695a3!5m2!4m1!1i2!8m2!3d43.3630929!4d-5.8538786!16s%2Fg%2F11b77b3hsw?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D)")
+    st.markdown(
+        f"""
+        <div class="normal-text">
+            <b>🏰 Banquete:</b> Hotel Reconquista, Oviedo.
+            <br>
+            <a href="https://www.google.com/maps/place/Eurostars+Hotel+de+La+Reconquista/" target="_blank">Ver en Google Maps</a>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
     try:
         imagen_hotel = Image.open("assets/hotel_reconquista.jpg")
-        # Convertimos la imagen a base64
         buffered = BytesIO()
         imagen_hotel.save(buffered, format="JPEG")
         img_str = base64.b64encode(buffered.getvalue()).decode()
-        # Renderizamos la imagen circular
-        st.markdown(
-            f"""
-            <img src="data:image/jpeg;base64,{img_str}" class="circular-image">
-            """,
-            unsafe_allow_html=True
-        )
+        st.markdown(f"""<img src="data:image/jpeg;base64,{img_str}" class="circular-image">""", unsafe_allow_html=True)
     except FileNotFoundError:
-        st.error("No se encontró la imagen del hotel. Asegúrate de que 'assets/hotel_reconquista.jpg' exista.")
+        st.error("No se encontró la imagen del hotel.")
 
     # Confirmación de Asistencia
     st.header("Confirmación de Asistencia")
