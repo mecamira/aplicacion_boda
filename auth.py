@@ -22,7 +22,8 @@ def login_user():
                 st.session_state.login = True
                 st.session_state.role = USERS[username]["role"]
                 st.success(f"Bienvenido, {username} ({st.session_state.role})")
-                st.experimental_rerun()  # Refresca la página automáticamente
+                # Refresca la página automáticamente tras un login exitoso
+                st.experimental_rerun()
             else:
                 st.error("Usuario o contraseña incorrectos")
         return False
