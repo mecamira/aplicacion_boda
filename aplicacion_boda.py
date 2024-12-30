@@ -35,7 +35,7 @@ if login_user():
         st.image("https://via.placeholder.com/800x400?text=Bienvenidos+a+la+Boda", use_container_width=True)
 
     # Página de invitados (Solo para Invitados y Administradores)
-    elif page == "Invitados" and role in ["Administrador"]:
+    elif page == "Invitados" and role in ["Administrador", "Invitado"]:
         st.title("📋 Gestión de Invitados")
         excel_url = "https://docs.google.com/spreadsheets/d/1TjlHkjPvyxZrTy2YR2eUWjHIkSS0fcWg/export?format=xlsx"
         data_inv = pd.read_excel(excel_url, sheet_name="INVITADOS")
