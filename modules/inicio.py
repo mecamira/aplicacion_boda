@@ -47,13 +47,13 @@ def add_custom_styles(background_path):
         }}
         h1, h2 {{
             color: #000000 !important; /* Forzar negro para encabezados */
-            font-family: 'Dancing Script', cursive; /* Cambiar estilo de fuente */
+            font-family: 'Dancing Script', bolt; /* Cambiar estilo de fuente */
             font-size: 2.5em;
         }}
         p, label, .stMarkdown {{
             color: #000000; /* Color negro para textos generales */
             font-family: 'Dancing Script', cursive;
-            font-size: 1.2em;
+            font-size: 2em;
         }}
         .stTextInput > div > div > input {{
             background-color: white;
