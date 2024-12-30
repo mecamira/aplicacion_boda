@@ -57,7 +57,7 @@ def add_custom_styles(background_path):
         p, label, .stMarkdown {{
             color: #000000; /* Color negro para textos generales */
             font-family: 'Dancing Script', cursive;
-            font-size: 100px; /* Tamaño en píxeles */
+            font-size: 24px; /* Tamaño en píxeles */
         }}
         .stTextInput > div > div > input {{
             background-color: white;
@@ -135,16 +135,20 @@ def run():
         st.error("No se encontró la imagen principal. Asegúrate de que 'assets/Foto_principal.jpeg' exista.")
 
     st.markdown(
-        """
-        ¡Que sí! ¡Que nos casamos! Estamos muy felices de compartir con vosotros cada momento de nuestro día especial. Por eso estamos preparando una boda que será para recordar.
-        
-        Mientras llega el gran día, hemos creado esta app con varias secciones para que estés al día de todo. 
-        
-        Una cosa importante. En la sección de Confirmar Asitencia puedes confirmar si asistirás o no, además de compartirnos cualquier mensaje o sugerencia. Confírmanos lo antes posible, por favor, que así organizarlo todo nos será mucho más fácil. 
-        Nos vemos pronto 🌸
-
-        Noemi y Alejandro
-        """
+        f"""
+        <div style="font-size: 28px; font-family: 'Dancing Script', cursive; color: #000000; text-align: center;">
+            ¡Que sí! ¡Que nos casamos! Estamos muy felices de compartir con vosotros cada momento de nuestro día especial. Por eso estamos preparando una boda que será para recordar.
+            <br><br>
+            Mientras llega el gran día, hemos creado esta app con varias secciones para que estés al día de todo.
+            <br><br>
+            Una cosa importante. En la sección de Confirmar Asistencia puedes confirmar si asistirás o no, además de compartirnos cualquier mensaje o sugerencia. Confírmanos lo antes posible, por favor, que así organizarlo todo nos será mucho más fácil.
+            <br><br>
+            Nos vemos pronto 🌸
+            <br><br>
+            Noemi y Alejandro
+        </div>
+        """,
+        unsafe_allow_html=True
     )
 
     # Cuenta Atrás
