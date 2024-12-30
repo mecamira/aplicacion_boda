@@ -109,12 +109,15 @@ def run():
     # Cuenta Atrás
     fecha_boda = datetime(2026, 6, 13, 12, 0, 0)  # Fecha corregida
     # Cuenta Atrás
-    st.subheader("Cuenta atrás para la boda")
     dias_restantes = (fecha_boda - datetime.now()).days
 
     # Texto estilizado
     st.markdown(
-        f"<p class='dias-restantes'>¡Faltan {dias_restantes} días para el gran día!</p>",
+        f"""
+        <p style="color: #8B4513; font-size: 1.5em; font-weight: bold;">
+            ¡Faltan <span style="font-size: 2.5em;">{dias_restantes}</span> días para el gran día!
+        </p>
+        """,
         unsafe_allow_html=True
     )
 
