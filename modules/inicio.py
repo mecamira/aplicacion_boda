@@ -30,6 +30,13 @@ def add_custom_styles(background_path):
     st.markdown(
         f"""
         <style>
+        .dias-restantes {{
+            color: #8B4513; /* Marrón otoñal */
+            font-size: 2em; /* Tamaño mayor para destacar */
+            font-weight: bold; /* Negrita */
+        }}
+        </style>
+        <style>
         .stApp {{
             background-image: url("data:image/jpg;base64,{base64_image}");
             background-size: cover;
@@ -101,8 +108,15 @@ def run():
 
     # Cuenta Atrás
     fecha_boda = datetime(2026, 6, 13, 12, 0, 0)  # Fecha corregida
+    # Cuenta Atrás
+    st.subheader("Cuenta atrás para la boda")
     dias_restantes = (fecha_boda - datetime.now()).days
-    st.subheader(f"¡Faltan {dias_restantes} días para el gran día!")
+
+    # Texto estilizado
+    st.markdown(
+        f"<p class='dias-restantes'>¡Faltan {dias_restantes} días para el gran día!</p>",
+        unsafe_allow_html=True
+    )
 
     # Información del Evento
     st.header("Detalles del Evento")
