@@ -33,7 +33,8 @@ if page == "Inicio":
         ¡Esperamos que disfrutes esta experiencia tanto como nosotros al prepararla! 🎊
         """
     )
-    st.image("https://via.placeholder.com/800x400?text=Bienvenidos+a+la+Boda", use_column_width=True)
+    st.image("https://via.placeholder.com/800x400?text=Bienvenidos+a+la+Boda", use_container_width=True)
+
 
 # Página de invitados
 elif page == "Invitados":
