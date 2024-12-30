@@ -104,7 +104,11 @@ def run():
     add_custom_styles(softened_background_path)
 
     # Encabezado Principal
-    st.write("**N & A**")
+     st.markdown(
+         """
+        <p style="font-family: 'Parisienne',monospace; font-size: 20px; color: #8B4513;">
+            N & A
+        </p>
     st.title("¡Nos casamos! 💍")
 
     # Foto e introducción
