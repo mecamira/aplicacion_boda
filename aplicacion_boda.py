@@ -2,7 +2,7 @@ import pandas as pd
 import streamlit as st
 from streamlit_option_menu import option_menu
 import plotly.express as px
-from auth import login_user, get_role
+from auth import login_user, get_role, logout
 
 # Verificar si el usuario está logueado
 if login_user():
@@ -17,7 +17,7 @@ if login_user():
             menu_icon="cast",
             default_index=0,
         )
-        st.sidebar.button("Cerrar sesión", on_click=lambda: logout())
+        st.sidebar.button("Cerrar sesión", on_click=logout)
 
     # Página de inicio
     if page == "Inicio":
@@ -52,3 +52,5 @@ if login_user():
         excel_url = "https://docs.google.com/spreadsheets/d/1TjlHkjPvyxZrTy2YR2eUWjHIkSS0fcWg/export?format=xlsx"
         data_restaurantes = pd.read_excel(excel_url, sheet_name="RESTAURANTES")
         st.dataframe(data_restaurantes)
+else:
+    st.stop()  # Detenemos la ejecución si el usuario no está logueado

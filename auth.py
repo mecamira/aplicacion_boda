@@ -18,21 +18,18 @@ def login_user():
         return True
 
     # Formulario de login
-    with st.form("login_form"):
-        st.title("🔒 Login")
-        username = st.text_input("Usuario", key="username_input")
-        password = st.text_input("Contraseña", type="password", key="password_input")
-        submit_button = st.form_submit_button("Iniciar sesión")
+    st.title("🔒 Login")
+    username = st.text_input("Usuario", key="username_input")
+    password = st.text_input("Contraseña", type="password", key="password_input")
 
-        if submit_button:
-            if username in USERS and USERS[username]["password"] == password:
-                st.session_state.login = True
-                st.session_state.role = USERS[username]["role"]
-                st.session_state.username = username
-                st.success(f"Bienvenido, {username} ({st.session_state.role})")
-            else:
-                st.error("Usuario o contraseña incorrectos")
-    return False
+    if st.button("Iniciar sesión"):
+        if username in USERS and USERS[username]["password"] == password:
+            st.session_state.login = True
+            st.session_state.role = USERS[username]["role"]
+            st.session_state.username = username
+        else:
+            st.error("Usuario o contraseña incorrectos")
+    return st.session_state.login
 
 def get_role():
     """Devuelve el rol del usuario logueado."""
