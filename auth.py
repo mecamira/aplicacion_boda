@@ -6,27 +6,22 @@ USERS = {
 }
 
 def login_user():
-    """Procesa el login del usuario y actualiza el estado de sesión."""
-    if "login" not in st.session_state:
-        st.session_state.login = False
-        st.session_state.role = None
-
-    with st.form("login_form"):
-        st.subheader("🔒 Identificarse")
-        username = st.text_input("Usuario", key="username_input")
-        password = st.text_input("Contraseña", type="password", key="password_input")
-        login_clicked = st.form_submit_button("Iniciar sesión")
-
-        if login_clicked:
-            if username in USERS and USERS[username]["password"] == password:
-                st.session_state.login = True
-                st.session_state.role = USERS[username]["role"]
-                st.success(f"Bienvenido, {username} ({st.session_state.role})")
-            else:
-                st.error("Usuario o contraseña incorrectos")
+    """Gestión del login de usuarios."""
+    st.title("🔒 Login")
+    username = st.text_input("Usuario")
+    password = st.text_input("Contraseña", type="password")
+    
+    if st.button("Iniciar sesión"):
+        if username in USERS and USERS[username]["password"] == password:
+            st.session_state.login = True
+            st.session_state.role = USERS[username]["role"]
+            st.success(f"Bienvenido, {username} ({st.session_state.role})")
+        else:
+            st.error("Usuario o contraseña incorrectos.")
 
 def logout():
-    """Cierra la sesión del usuario."""
+    """Gestión del cierre de sesión."""
     st.session_state.login = False
     st.session_state.role = None
-    st.info("Sesión cerrada con éxito")
+    st.sidebar.empty()
+    st.success("Has cerrado sesión correctamente.")
