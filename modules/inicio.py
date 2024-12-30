@@ -34,6 +34,27 @@ def add_custom_styles(background_path):
             background-image: url("data:image/jpg;base64,{base64_image}");
             background-size: cover;
             background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center; /* Centrar todo el contenido */
+        }}
+        .dias-restantes {{
+            color: #8B4513; /* Marrón otoñal */
+            font-size: 24px; /* Texto general */
+            font-weight: bold;
+        }}
+        .dias-restantes span {{
+            font-size: 48px; /* Tamaño del número */
+            font-weight: bold;
+        }}
+        </style>
+        <style>
+        .stApp {{
+            background-image: url("data:image/jpg;base64,{base64_image}");
+            background-size: cover;
+            background-attachment: fixed;
         }}
         .stApp h1, .stApp h2 {{
             color: #000000; /* Color negro para encabezados */
@@ -100,15 +121,15 @@ def run():
     )
 
     # Cuenta Atrás
-    fecha_boda = datetime(2026, 6, 13, 12, 0, 0)  # Fecha corregida
+    fecha_boda = datetime(2026, 6, 13, 12, 0, 0)
     # Cuenta Atrás
     dias_restantes = (fecha_boda - datetime.now()).days
 
     # Texto estilizado
     st.markdown(
         f"""
-        <p style="color: #8B4513; font-size: 2.0em;">
-            ¡Faltan <span style="font-size: 2.0em;">{dias_restantes}</span> días para el gran día!
+        <p class="dias-restantes">
+            ¡Faltan <span>{dias_restantes}</span> días para el gran día!
         </p>
         """,
         unsafe_allow_html=True
