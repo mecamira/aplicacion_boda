@@ -15,7 +15,6 @@ def login_user():
 
     # Si ya está logueado, no mostrar el formulario de login
     if st.session_state.login:
-        st.sidebar.button("Cerrar sesión", on_click=logout)
         return True
 
     # Formulario de login
@@ -29,10 +28,7 @@ def login_user():
             st.session_state.login = True
             st.session_state.role = USERS[username]["role"]
             st.session_state.username = username
-            st.success(f"Bienvenido, {username} ({st.session_state.role})")
-            st.experimental_set_query_params()  # Limpia la URL de parámetros adicionales
-            st.empty()  # Limpia el formulario de login
-            return True
+            st.experimental_rerun()  # Refresca automáticamente tras login
         else:
             st.error("Usuario o contraseña incorrectos")
     return False
@@ -46,3 +42,4 @@ def logout():
     st.session_state.login = False
     st.session_state.role = None
     st.session_state.username = None
+    st.experimental_rerun()  # Refresca automáticamente tras logout

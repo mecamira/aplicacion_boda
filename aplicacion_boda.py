@@ -12,8 +12,8 @@ if login_user():
     with st.sidebar:
         page = option_menu(
             "Navegación",
-            ["Inicio", "Invitados", "Gastos", "Restaurantes"],
-            icons=["house", "people", "wallet", "map"],
+            ["Inicio", "Gastos", "Restaurantes"],
+            icons=["house", "wallet", "map"],
             menu_icon="cast",
             default_index=0,
         )
@@ -33,18 +33,6 @@ if login_user():
             """
         )
         st.image("https://via.placeholder.com/800x400?text=Bienvenidos+a+la+Boda", use_container_width=True)
-
-    # Página de invitados (Solo para Administradores)
-    elif page == "Invitados" and role == "Administrador":
-        st.title("📋 Gestión de Invitados")
-        excel_url = "https://docs.google.com/spreadsheets/d/1TjlHkjPvyxZrTy2YR2eUWjHIkSS0fcWg/export?format=xlsx"
-        data_inv = pd.read_excel(excel_url, sheet_name="INVITADOS")
-        data_inv['Estado'] = data_inv['Confirma'].fillna('Pendiente').replace('', 'Pendiente')
-
-        # Mostrar métricas y tabla
-        st.metric("Total invitados", len(data_inv))
-        st.metric("Confirmados", len(data_inv[data_inv['Estado'] == 'Confirmado']))
-        st.dataframe(data_inv)
 
     # Página de gastos (Solo para Administradores)
     elif page == "Gastos" and role == "Administrador":
