@@ -104,7 +104,8 @@ def run():
     add_custom_styles(softened_background_path)
 
     # Encabezado Principal
-    st.title("¡Estás invitado a nuestra boda! 💍")
+    st.write("**N & A**")
+    st.title("¡Nos casamos! 💍")
 
     # Foto e introducción
     try:
