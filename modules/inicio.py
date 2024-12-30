@@ -48,12 +48,12 @@ def add_custom_styles(background_path):
         h1 {{
             color: #000000 !important; /* Forzar negro para encabezados */
             font-family: 'Dancing Script', cursive;
-            font-size: 20px; /* Tamaño aumentado */
+            font-size: 4em; /* Tamaño aumentado */
         }}
         h2 {{
             color: #000000 !important; /* Forzar negro para encabezados */
             font-family: 'Dancing Script', cursive;
-            font-size: 20px; /* Tamaño aumentado */
+            font-size: 3em; /* Tamaño aumentado */
         }}
         p, label, .stMarkdown {{
             color: #000000; /* Color negro para textos generales */
