@@ -35,27 +35,24 @@ def add_custom_styles(background_path):
             background-size: cover;
             background-attachment: fixed;
         }}
-        .stApp .stMarkdown h1 {{
-            color: #3A3A3A; /* Gris oscuro para st.title */
-        }}
-        .stApp .stMarkdown h2 {{
-            color: #3A3A3A; /* Gris oscuro para subtítulos */
+        .stApp h1, .stApp h2 {{
+            color: #000000; /* Color negro para encabezados */
         }}
         p, label, .stMarkdown {{
-            color: #3A3A3A; /* Gris oscuro para textos generales */
+            color: #000000; /* Color negro para textos generales */
         }}
         .stTextInput > div > div > input {{
             background-color: white;
             border: 1px solid #ccc;
-            color: #3A3A3A;
+            color: #000000;
         }}
         .stTextArea > div > textarea {{
             background-color: white;
             border: 1px solid #ccc;
-            color: #3A3A3A;
+            color: #000000;
         }}
         .stRadio > div {{
-            color: #3A3A3A; /* Ajuste de opciones de radio */
+            color: #000000; /* Ajuste de opciones de radio */
         }}
         .stButton > button {{
             background-color: #5A9;
@@ -70,12 +67,13 @@ def add_custom_styles(background_path):
         .stExpander {{
             background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco translúcido */
             border-radius: 8px;
-            color: #3A3A3A;
+            color: #000000;
         }}
         </style>
         """,
         unsafe_allow_html=True
     )
+
 
 def run():
     # Preparar el fondo suavizado
