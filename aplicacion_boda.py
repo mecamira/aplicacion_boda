@@ -17,6 +17,7 @@ if login_user():
             menu_icon="cast",
             default_index=0,
         )
+        st.sidebar.button("Cerrar sesión", on_click=lambda: logout())
 
     # Página de inicio
     if page == "Inicio":
@@ -51,6 +52,3 @@ if login_user():
         excel_url = "https://docs.google.com/spreadsheets/d/1TjlHkjPvyxZrTy2YR2eUWjHIkSS0fcWg/export?format=xlsx"
         data_restaurantes = pd.read_excel(excel_url, sheet_name="RESTAURANTES")
         st.dataframe(data_restaurantes)
-
-    else:
-        st.warning("No tienes acceso a esta página.")
