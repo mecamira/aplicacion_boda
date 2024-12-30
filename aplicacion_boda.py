@@ -34,8 +34,8 @@ if login_user():
         )
         st.image("https://via.placeholder.com/800x400?text=Bienvenidos+a+la+Boda", use_container_width=True)
 
-    # Página de invitados (Solo para Invitados y Administradores)
-    elif page == "Invitados" and role in ["Administrador", "Invitado"]:
+    # Página de invitados (Solo para Administradores)
+    elif page == "Invitados" and role == "Administrador":
         st.title("📋 Gestión de Invitados")
         excel_url = "https://docs.google.com/spreadsheets/d/1TjlHkjPvyxZrTy2YR2eUWjHIkSS0fcWg/export?format=xlsx"
         data_inv = pd.read_excel(excel_url, sheet_name="INVITADOS")
@@ -63,5 +63,6 @@ if login_user():
         excel_url = "https://docs.google.com/spreadsheets/d/1TjlHkjPvyxZrTy2YR2eUWjHIkSS0fcWg/export?format=xlsx"
         data_restaurantes = pd.read_excel(excel_url, sheet_name="RESTAURANTES")
         st.dataframe(data_restaurantes)
+
     else:
         st.warning("No tienes acceso a esta página.")
