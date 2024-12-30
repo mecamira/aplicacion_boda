@@ -105,10 +105,13 @@ def run():
 
     # Encabezado Principal
      st.markdown(
-         """
+         f"""
         <p style="font-family: 'Parisienne',monospace; font-size: 20px; color: #8B4513;">
             N & A
         </p>
+         """,
+        unsafe_allow_html=True
+    )
     st.title("¡Nos casamos! 💍")
 
     # Foto e introducción
