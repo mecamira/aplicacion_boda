@@ -135,14 +135,11 @@ def run():
 
     st.markdown(
         """
-        ¡Que sí! ¡Que nos casamos el 13 de junio de 2026! 
-                        ! 
-        Estamos muy felices de compartir con vosotros cada momento de nuestro día especial. Por eso estamos preparando una boda que será para recordar.
+        ¡Que sí! ¡Que nos casamos! Estamos muy felices de compartir con vosotros cada momento de nuestro día especial. Por eso estamos preparando una boda que será para recordar.
         
         Mientras llega el gran día, hemos creado esta app con varias secciones para que estés al día de todo. 
         
         Una cosa importante. En la sección de Confirmar Asitencia puedes confirmar si asistirás o no, además de compartir tcualquier sugerencia que se te ocurra. Confírmanos lo antes posible, por favor, que así organizarlo todo nos será mucho más fácil. 
-        
         Nos vemos pronto🌸
 
         Noemi y Aleandro
