@@ -1,12 +1,6 @@
 import streamlit as st
 from PIL import Image
 
-# Configuración de la página
-st.set_page_config(
-    page_title="Boda de Alejandro y [Nombre de tu pareja]",
-    layout="wide"
-)
-
 def run():
     # Cargar la imagen subida
     try:

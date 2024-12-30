@@ -2,6 +2,12 @@ import streamlit as st
 from utils.helpers import load_page
 import auth  # Importa las funciones de autenticación
 
+# Configuración de la página debe ser la primera instrucción
+st.set_page_config(
+    page_title="Boda de Alejandro y [Nombre de tu pareja]",
+    layout="wide"
+)
+
 # Estado de sesión para el login
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
@@ -24,7 +30,6 @@ elif selected_page == "Login" and not st.session_state.logged_in:
     load_page("auth")  # Cambiamos "modules.login" por "auth"
 
 elif selected_page == "Cerrar sesión" and st.session_state.logged_in:
-    import auth
     auth.logout()
 
 elif st.session_state.logged_in:
