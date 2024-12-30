@@ -4,14 +4,14 @@ from datetime import datetime
 import pandas as pd
 import os
 
-# Aplicar estilo personalizado con fondo
-def add_background():
+# Aplicar estilo personalizado con fondo y textos
+def add_custom_styles():
     # Leer la imagen y convertirla a base64
     import base64
     with open("assets/eucalyptus_background.jpg", "rb") as image_file:
         base64_image = base64.b64encode(image_file.read()).decode()
 
-    # Aplicar el fondo con CSS
+    # Aplicar el fondo y estilos
     st.markdown(
         f"""
         <style>
@@ -20,14 +20,43 @@ def add_background():
             background-size: cover;
             background-attachment: fixed;
         }}
+        h1, h2, h3, h4, h5, h6 {{
+            color: #3A3A3A; /* Gris oscuro */
+        }}
+        p, label {{
+            color: #3A3A3A; /* Gris oscuro para textos */
+        }}
+        .stTextInput > div > div > input {{
+            background-color: white;
+            border: 1px solid #ccc;
+            color: #3A3A3A;
+        }}
+        .stTextArea > div > textarea {{
+            background-color: white;
+            border: 1px solid #ccc;
+            color: #3A3A3A;
+        }}
+        .stRadio > div {{
+            color: #3A3A3A;
+        }}
+        .stButton > button {{
+            background-color: #5A9;
+            color: white;
+            border-radius: 8px;
+            border: none;
+        }}
+        .stButton > button:disabled {{
+            background-color: #ccc;
+            color: #666;
+        }}
         </style>
         """,
         unsafe_allow_html=True
     )
 
 def run():
-    # Aplicar fondo
-    add_background()
+    # Aplicar fondo y estilos personalizados
+    add_custom_styles()
 
     # Encabezado Principal
     st.title("¡Estás invitado a nuestra boda! 💍")
