@@ -70,9 +70,16 @@ def add_custom_styles(background_path):
             color: #666;
         }}
         .stExpander {{
-            background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco translúcido */
+            background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco translúcido */
             border-radius: 8px;
             color: #000000;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2); /* Sombra para destacar */
+        }}
+        .separador {{
+            width: 100%;
+            height: 4px;
+            background-color: #8B4513; /* Marrón otoñal */
+            margin: 20px 0;
         }}
         </style>
         """,
@@ -107,6 +114,9 @@ def run():
     fecha_boda = datetime(2026, 6, 13, 12, 0, 0)
     dias_restantes = (fecha_boda - datetime.now()).days
 
+    # Separador superior
+    st.markdown('<div class="separador"></div>', unsafe_allow_html=True)
+
     # Texto estilizado
     st.markdown(
         f"""
@@ -117,11 +127,14 @@ def run():
         unsafe_allow_html=True
     )
 
+    # Separador inferior
+    st.markdown('<div class="separador"></div>', unsafe_allow_html=True)
+
     # Información del Evento
     st.header("Detalles del Evento")
 
     # Ceremonia
-    st.write("**Ceremonia:**")
+    st.write("**⛪ Ceremonia:**")
     st.write("**Lugar:** Iglesia San Pedro de los Arcos, Oviedo.")
     st.write("[Ver en Google Maps](https://www.google.com/maps/place/Iglesia+de+San+Pedro+de+los+Arcos/@43.3672191,-5.8628094,1660m/data=!3m2!1e3!4b1!4m6!3m5!1s0xd368d023a71211f:0x17b0a2a66f4e2e75!8m2!3d43.3672153!4d-5.8579385!16s%2Fg%2F12lnh3l3y?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D)")
     try:
@@ -131,7 +144,7 @@ def run():
         st.error("No se encontró la imagen de la iglesia. Asegúrate de que 'assets/iglesia_san_pedro.jpg' exista.")
 
     # Banquete
-    st.write("**Banquete:**")
+    st.write("**🏰 Banquete:**")
     st.write("**Lugar:** Hotel Reconquista, Oviedo.")
     st.write("[Ver en Google Maps](https://www.google.com/maps/place/Eurostars+Hotel+de+La+Reconquista/@43.3630968,-5.8564535,830m/data=!3m1!1e3!4m9!3m8!1s0xd368cfd2a506959:0x5204d03f5e4695a3!5m2!4m1!1i2!8m2!3d43.3630929!4d-5.8538786!16s%2Fg%2F11b77b3hsw?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D)")
     try:
