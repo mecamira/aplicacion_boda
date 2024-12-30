@@ -11,26 +11,29 @@ def login_user():
     if "login" not in st.session_state:
         st.session_state.login = False
         st.session_state.role = None
-        st.session_state.username = None  # Para identificar al usuario logueado
+        st.session_state.username = None  # Identifica al usuario logueado
 
-    if not st.session_state.login:
-        st.title("🔒 Login")
-        username = st.text_input("Usuario", key="username_input")
-        password = st.text_input("Contraseña", type="password", key="password_input")
-
-        if st.button("Iniciar sesión"):
-            if username in USERS and USERS[username]["password"] == password:
-                st.session_state.login = True
-                st.session_state.role = USERS[username]["role"]
-                st.session_state.username = username
-                st.experimental_set_query_params(logged_in="true")  # Refresca el estado
-                st.experimental_rerun()  # Fuerza la recarga para evitar clics adicionales
-            else:
-                st.error("Usuario o contraseña incorrectos")
-        return False
-    else:
+    # Si ya está logueado, no mostrar el formulario de login
+    if st.session_state.login:
         st.sidebar.button("Cerrar sesión", on_click=logout)
         return True
+
+    # Formulario de login
+    st.title("🔒 Login")
+    username = st.text_input("Usuario")
+    password = st.text_input("Contraseña", type="password")
+
+    # Verificar credenciales al hacer clic
+    if st.button("Iniciar sesión"):
+        if username in USERS and USERS[username]["password"] == password:
+            st.session_state.login = True
+            st.session_state.role = USERS[username]["role"]
+            st.session_state.username = username
+            st.success(f"Bienvenido, {username} ({st.session_state.role})")
+            return True
+        else:
+            st.error("Usuario o contraseña incorrectos")
+    return False
 
 def get_role():
     """Devuelve el rol del usuario logueado."""
@@ -41,5 +44,3 @@ def logout():
     st.session_state.login = False
     st.session_state.role = None
     st.session_state.username = None
-    st.experimental_set_query_params()  # Limpia los parámetros de la URL
-    st.experimental_rerun()  # Refresca la página
