@@ -2,7 +2,8 @@
 import streamlit as st
 
 def mostrar_inicio():
-    st.title("🎉 Bienvenidos a la Aplicación de la Boda 💍")
+    """Página principal de la aplicación."""
+    st.title("🎉 Inicio - Bienvenidos a la Aplicación de la Boda 💍")
     st.markdown(
         """
         Esta aplicación ha sido creada para gestionar de manera eficiente todos los detalles de nuestra boda. 
@@ -14,4 +15,5 @@ def mostrar_inicio():
         ¡Esperamos que disfrutes esta experiencia tanto como nosotros al prepararla! 🎊
         """
     )
-    st.image("https://via.placeholder.com/800x400?text=Bienvenidos+a+la+Boda", use_container_width=True)
+    st.image("https://via.placeholder.com/800x400?text=Inicio+-+Bienvenidos+a+la+Boda", use_container_width=True)
+
