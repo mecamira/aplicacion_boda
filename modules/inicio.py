@@ -24,7 +24,6 @@ def prepare_background():
 # Aplicar estilo personalizado con fondo y textos
 def add_custom_styles(background_path):
     # Leer la imagen y convertirla a base64
-    import base64
     with open(background_path, "rb") as image_file:
         base64_image = base64.b64encode(image_file.read()).decode()
 
@@ -48,17 +47,17 @@ def add_custom_styles(background_path):
         h1 {{
             color: #000000 !important; /* Forzar negro para encabezados */
             font-family: 'Dancing Script', cursive;
-            font-size: 4em; /* Tamaño aumentado */
+            font-size: 64px; /* Tamaño en píxeles */
         }}
         h2 {{
             color: #000000 !important; /* Forzar negro para encabezados */
             font-family: 'Dancing Script', cursive;
-            font-size: 3em; /* Tamaño aumentado */
+            font-size: 48px; /* Tamaño en píxeles */
         }}
         p, label, .stMarkdown {{
             color: #000000; /* Color negro para textos generales */
             font-family: 'Dancing Script', cursive;
-            font-size: 1.8em;
+            font-size: 24px; /* Tamaño en píxeles */
         }}
         .stTextInput > div > div > input {{
             background-color: white;
@@ -82,6 +81,7 @@ def add_custom_styles(background_path):
             border-radius: 8px;
             border: none;
             font-family: 'Dancing Script', cursive;
+            font-size: 20px; /* Tamaño en píxeles */
         }}
         .stButton > button:disabled {{
             background-color: #ccc;
@@ -94,6 +94,7 @@ def add_custom_styles(background_path):
             color: #000000;
             box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2); /* Sombra para destacar */
             font-family: 'Dancing Script', cursive;
+            font-size: 24px; /* Tamaño en píxeles */
         }}
         .separador {{
             width: 100%;
@@ -105,7 +106,7 @@ def add_custom_styles(background_path):
             display: block;
             margin: 0 auto;
             border-radius: 50%;
-            width: 350px; /* Cambiar tamaño */
+            width: 350px; /* Tamaño de imagen ajustado */
             height: 350px;
             object-fit: cover;
         }}
