@@ -13,12 +13,15 @@ menu_items = ["Inicio"]
 if st.session_state.login and st.session_state.role == "Administrador":
     menu_items.extend(["Invitados", "Gastos", "Restaurantes"])
 
+if st.session_state.login:
+    menu_items.append("Cerrar sesión")  # Añadimos la opción de cerrar sesión al menú
+
 # Barra de navegación
 with st.sidebar:
     page = option_menu(
         "Navegación",
         menu_items if st.session_state.login else ["Inicio", "Login"],
-        icons=["house", "people", "wallet", "map", "key"],
+        icons=["house", "people", "wallet", "map", "key", "box-arrow-right"],
         menu_icon="cast",
         default_index=0,
     )
@@ -70,6 +73,11 @@ elif page == "Restaurantes" and st.session_state.login and st.session_state.role
     excel_url = "https://docs.google.com/spreadsheets/d/1TjlHkjPvyxZrTy2YR2eUWjHIkSS0fcWg/export?format=xlsx"
     data_restaurantes = pd.read_excel(excel_url, sheet_name="RESTAURANTES")
     st.dataframe(data_restaurantes)
+
+# Página de cerrar sesión
+elif page == "Cerrar sesión" and st.session_state.login:
+    logout()
+    st.experimental_rerun()  # Forzamos la recarga para limpiar la sesión
 
 # Redirigir si intenta acceder sin login
 elif not st.session_state.login and page != "Inicio":
