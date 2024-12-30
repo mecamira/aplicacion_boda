@@ -1,46 +1,81 @@
 import pandas as pd
 import streamlit as st
+from streamlit_option_menu import option_menu
 import plotly.express as px
 
-# URL del Google Sheet en formato CSV
-url = "https://docs.google.com/spreadsheets/d/1TjlHkjPvyxZrTy2YR2eUWjHIkSS0fcWg/export?format=csv"
+# Cargar datos desde el Excel
+excel_url = "https://docs.google.com/spreadsheets/d/1TjlHkjPvyxZrTy2YR2eUWjHIkSS0fcWg/export?format=xlsx"
+data_inv = pd.read_excel(excel_url, sheet_name="INVITADOS")
+data_gastos = pd.read_excel(excel_url, sheet_name="GASTOS")
+data_restaurantes = pd.read_excel(excel_url, sheet_name="RESTAURANTES")
 
-# Título de la aplicación
-st.markdown("# Gestión de Invitados - Boda Noe y Alejandro 💍")
-st.write("Bienvenidos a la aplicación para gestionar los invitados de la boda. Aquí podrás ver el estado de las confirmaciones, filtrar por categorías y visualizar gráficos interactivos.")
+# Configuración de la barra de navegación
+with st.sidebar:
+    page = option_menu(
+        "Navegación",
+        ["Inicio", "Invitados", "Gastos", "Restaurantes"],
+        icons=["house", "people", "wallet", "map"],
+        menu_icon="cast",
+        default_index=0,
+    )
 
-try:
-    # Leer los datos desde la URL
-    data = pd.read_csv(url)
+# Página de inicio
+if page == "Inicio":
+    st.title("🎉 Bienvenidos a la Aplicación de la Boda 💍")
+    st.markdown(
+        """
+        Esta aplicación ha sido creada para gestionar de manera eficiente todos los detalles de nuestra boda. 
+        Explora las diferentes secciones para:
+        - **Gestión de invitados**: Confirmar asistencia, verificar alérgenos y regalos.
+        - **Gastos**: Analizar y controlar el presupuesto.
+        - **Restaurantes**: Evaluar opciones de lugares para la celebración.
+        
+        ¡Esperamos que disfrutes esta experiencia tanto como nosotros al prepararla! 🎊
+        """
+    )
+    st.image("https://via.placeholder.com/800x400?text=Bienvenidos+a+la+Boda", use_column_width=True)
 
-    # Añadir columnas calculadas (por ejemplo: estado de confirmación)
-    data['Estado'] = data['Confirma'].fillna('Pendiente').replace('', 'Pendiente')
+# Página de invitados
+elif page == "Invitados":
+    st.title("📋 Gestión de Invitados")
+    data_inv['Estado'] = data_inv['Confirma'].fillna('Pendiente').replace('', 'Pendiente')
 
-    # Mostrar métricas principales
-    confirmados = len(data[data['Estado'] == 'Confirmado'])
-    pendientes = len(data[data['Estado'] == 'Pendiente'])
-    total = len(data)
-
-    st.markdown("## Resumen")
-    st.metric("Total de invitados", total)
+    # Resumen
+    confirmados = len(data_inv[data_inv['Estado'] == 'Confirmado'])
+    pendientes = len(data_inv[data_inv['Estado'] == 'Pendiente'])
+    st.metric("Total invitados", len(data_inv))
     st.metric("Confirmados", confirmados)
     st.metric("Pendientes", pendientes)
 
-    # Filtro interactivo por estado
-    st.markdown("## Filtrar invitados por estado")
-    filtro_estado = st.selectbox("Selecciona el estado", ["Todos", "Confirmado", "Pendiente"])
+    # Mostrar la tabla completa
+    st.dataframe(data_inv)
+
+    # Filtro interactivo
+    filtro_estado = st.selectbox("Filtrar por estado", ["Todos", "Confirmado", "Pendiente"])
     if filtro_estado != "Todos":
-        data_filtrada = data[data['Estado'] == filtro_estado]
-    else:
-        data_filtrada = data
+        st.dataframe(data_inv[data_inv['Estado'] == filtro_estado])
 
-    st.dataframe(data_filtrada)
+# Página de gastos
+elif page == "Gastos":
+    st.title("💰 Gestión de Gastos")
+    st.dataframe(data_gastos)
 
-    # Gráfico interactivo
-    st.markdown("## Visualización de confirmaciones")
-    fig = px.bar(data, x="Estado", title="Confirmaciones por estado", color="Estado", text_auto=True)
+    # Gráfico de barras de gastos
+    st.markdown("### Comparativa de Previsión vs Gasto Real")
+    fig = px.bar(
+        data_gastos,
+        x="Concepto",
+        y=["Prevision", "Gasto Real"],
+        title="Gastos Previstos vs Reales",
+        barmode="group",
+    )
     st.plotly_chart(fig)
 
-except Exception as e:
-    st.error(f"Error al cargar los datos: {e}")
+# Página de restaurantes
+elif page == "Restaurantes":
+    st.title("🍴 Restaurantes")
+    st.dataframe(data_restaurantes)
 
+    # Mapa interactivo o información detallada
+    st.markdown("### Opciones de restaurantes cercanas a Oviedo")
+    st.write("Selecciona un restaurante para más detalles en futuras versiones.")
