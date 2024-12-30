@@ -136,7 +136,7 @@ def run():
 
     st.markdown(
         f"""
-        <div style="font-size: 15px; font-family: 'Dancing Script', cursive; color: #000000; text-align: center;">
+        <div style="font-size: 18px; font-family: 'Dancing Script', cursive; color: #000000; text-align: center;">
             ¡Que sí! ¡Que nos casamos! Estamos muy felices de compartir con vosotros cada momento de nuestro día especial. Por eso estamos preparando una boda que será para recordar.
             <br><br>
             Mientras llega el gran día, hemos creado esta app con varias secciones para que estés al día de todo.
