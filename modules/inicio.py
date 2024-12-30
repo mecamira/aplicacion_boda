@@ -29,8 +29,6 @@ def add_custom_styles(background_path):
     # Aplicar el fondo y estilos
     st.markdown(
         f"""
-
-        </style>
         <style>
         .stApp {{
             background-image: url("data:image/jpg;base64,{base64_image}");
@@ -110,7 +108,7 @@ def run():
     st.markdown(
         f"""
         <p style="color: #8B4513; font-size: 2.0em; font-weight: bold;">
-            ¡Faltan <span style="font-size: 2.2em;">{dias_restantes}</span> días para el gran día!
+            ¡Faltan <span style="font-size: 2.0em;">{dias_restantes}</span> días para el gran día!
         </p>
         """,
         unsafe_allow_html=True
