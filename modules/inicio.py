@@ -96,10 +96,10 @@ def add_custom_styles(background_path):
             font-family: 'Dancing Script', cursive;
         }}
         .separador {{
-            width: 80%;
+            width: 100%;
             height: 2px;
             background-color: #8B4513; /* Marrón otoñal */
-            margin: 20px 0;
+            margin: 10px 0;
         }}
         .circular-image {{
             display: block;
