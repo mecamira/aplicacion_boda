@@ -1,18 +1,22 @@
 import streamlit as st
 from PIL import Image
 
+# Configuración de la página
+st.set_page_config(
+    page_title="Boda de Alejandro y [Nombre de tu pareja]",
+    layout="wide"
+)
+
 def run():
     # Cargar la imagen subida
-    imagen_principal = Image.open("assets/Foto_principal.jpeg")
+    try:
+        imagen_principal = Image.open("assets/Foto_principal.jpeg")
+    except FileNotFoundError:
+        st.error("La imagen no se encuentra en la ruta especificada. Asegúrate de que 'assets/Foto_principal.jpeg' exista.")
 
-    # Diseño de la página
-    st.set_page_config(
-        page_title="Boda de Alejandro y [Nombre de tu pareja]",
-        layout="wide"
-    )
-
-    # Banner con imagen principal
-    st.image(imagen_principal, use_column_width=True)
+    # Mostrar el banner con la imagen principal
+    if 'imagen_principal' in locals():
+        st.image(imagen_principal, use_column_width=True)
 
     # Sección de bienvenida
     st.markdown(
@@ -96,4 +100,3 @@ def run():
         """,
         unsafe_allow_html=True
     )
-
