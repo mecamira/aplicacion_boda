@@ -57,7 +57,7 @@ def add_custom_styles(background_path):
         p, label, .stMarkdown {{
             color: #000000; /* Color negro para textos generales */
             font-family: 'Dancing Script', cursive;
-            font-size: 24px; /* Tamaño en píxeles */
+            font-size: 40px; /* Tamaño en píxeles */
         }}
         .stTextInput > div > div > input {{
             background-color: white;
