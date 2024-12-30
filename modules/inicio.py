@@ -21,10 +21,10 @@ def add_custom_styles():
             background-attachment: fixed;
         }}
         h1, h2, h3, h4, h5, h6 {{
-            color: #3A3A3A; /* Gris oscuro */
+            color: #3A3A3A; /* Gris oscuro para encabezados */
         }}
-        p, label {{
-            color: #3A3A3A; /* Gris oscuro para textos */
+        p, label, .stMarkdown {{
+            color: #3A3A3A; /* Gris oscuro para textos generales */
         }}
         .stTextInput > div > div > input {{
             background-color: white;
@@ -37,7 +37,7 @@ def add_custom_styles():
             color: #3A3A3A;
         }}
         .stRadio > div {{
-            color: #3A3A3A;
+            color: #3A3A3A; /* Ajuste de opciones de radio */
         }}
         .stButton > button {{
             background-color: #5A9;
@@ -48,6 +48,11 @@ def add_custom_styles():
         .stButton > button:disabled {{
             background-color: #ccc;
             color: #666;
+        }}
+        .stExpander {{
+            background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco translúcido */
+            border-radius: 8px;
+            color: #3A3A3A;
         }}
         </style>
         """,
