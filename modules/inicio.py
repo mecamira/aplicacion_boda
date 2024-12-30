@@ -99,7 +99,7 @@ def add_custom_styles(background_path):
             width: 100%;
             height: 2px;
             background-color: #8B4513; /* Marrón otoñal */
-            margin: 10px 0;
+            margin: 8px 0;
         }}
         .circular-image {{
             display: block;
