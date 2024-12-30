@@ -114,7 +114,7 @@ def run():
     # Texto estilizado
     st.markdown(
         f"""
-        <p style="color: #8B4513; font-size: 1.5em; font-weight: bold;">
+        <p style="color: #8B4513; font-size: 2.0em; font-weight: bold;">
             ¡Faltan <span style="font-size: 2.5em;">{dias_restantes}</span> días para el gran día!
         </p>
         """,
