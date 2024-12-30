@@ -118,4 +118,34 @@ def run():
 
     # Banquete
     st.write("**Banquete:**")
-    st.
+    st.write("- **Lugar:** Hotel Reconquista, Oviedo.")
+    st.write("- [Ver en Google Maps](https://www.google.com/maps/place/Eurostars+Hotel+de+La+Reconquista/@43.3630968,-5.8564535,830m/data=!3m1!1e3!4m9!3m8!1s0xd368cfd2a506959:0x5204d03f5e4695a3!5m2!4m1!1i2!8m2!3d43.3630929!4d-5.8538786!16s%2Fg%2F11b77b3hsw?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D)")
+    try:
+        imagen_hotel = Image.open("assets/hotel_reconquista.jpg")
+        st.image(imagen_hotel, width=400)
+    except FileNotFoundError:
+        st.error("No se encontró la imagen del hotel. Asegúrate de que 'assets/hotel_reconquista.jpg' exista.")
+
+    # Confirmación de Asistencia
+    st.header("Confirmación de Asistencia")
+    with st.expander("Confirmar Asistencia"):
+        with st.form(key='confirmacion_asistencia'):
+            nombre = st.text_input("Nombre Completo")
+            asistencia = st.radio("¿Asistirás al evento?", ("Sí", "No"))
+            alergias = st.text_area("Alergias o Preferencias Alimenticias")
+            submit_confirmacion = st.form_submit_button("Enviar Confirmación", disabled=True)
+            if submit_confirmacion:
+                st.info("Por ahora, este formulario está bloqueado.")
+
+    # Mensajes y Sugerencias
+    st.header("Mensajes y Sugerencias")
+    with st.expander("Enviar Mensaje o Sugerencia"):
+        with st.form(key='mensajes_sugerencias'):
+            nombre_mensaje = st.text_input("Tu Nombre")
+            mensaje = st.text_area("Escribe tu mensaje o sugerencia")
+            submit_mensaje = st.form_submit_button("Enviar Mensaje", disabled=True)
+            if submit_mensaje:
+                st.info("Por ahora, este formulario está bloqueado.")
+
+if __name__ == "__main__":
+    run()
