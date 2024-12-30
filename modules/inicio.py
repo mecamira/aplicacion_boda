@@ -16,7 +16,7 @@ def add_background():
         f"""
         <style>
         .stApp {{
-            background-image: url("data:image/png;base64,{base64_image}");
+            background-image: url("data:image/jpg;base64,{base64_image}");
             background-size: cover;
             background-attachment: fixed;
         }}
