@@ -45,15 +45,20 @@ def add_custom_styles(background_path):
             text-align: center; /* Centrar todo el contenido */
             font-family: 'Dancing Script', cursive;
         }}
-        h1, h2 {{
+        h1 {{
             color: #000000 !important; /* Forzar negro para encabezados */
-            font-family: 'Dancing Script', bolt; /* Cambiar estilo de fuente */
-            font-size: 2.5em;
+            font-family: 'Dancing Script', cursive;
+            font-size: 4em; /* Tamaño aumentado */
+        }}
+        h2 {{
+            color: #000000 !important; /* Forzar negro para encabezados */
+            font-family: 'Dancing Script', cursive;
+            font-size: 3em; /* Tamaño aumentado */
         }}
         p, label, .stMarkdown {{
             color: #000000; /* Color negro para textos generales */
             font-family: 'Dancing Script', cursive;
-            font-size: 10em;
+            font-size: 1.8em;
         }}
         .stTextInput > div > div > input {{
             background-color: white;
@@ -91,8 +96,8 @@ def add_custom_styles(background_path):
             font-family: 'Dancing Script', cursive;
         }}
         .separador {{
-            width: 100%;
-            height: 4px;
+            width: 80%;
+            height: 2px;
             background-color: #8B4513; /* Marrón otoñal */
             margin: 20px 0;
         }}
