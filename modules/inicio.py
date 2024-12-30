@@ -32,7 +32,7 @@ def add_custom_styles(background_path):
         <style>
         .dias-restantes {{
             color: #8B4513; /* Marrón otoñal */
-            font-size: 2em; /* Tamaño mayor para destacar */
+            font-size: 1.5em; /* Tamaño mayor para destacar */
             font-weight: bold; /* Negrita */
         }}
         </style>
