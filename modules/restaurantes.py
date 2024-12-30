@@ -1,5 +1,5 @@
 import streamlit as st
-from utils.helpers import cargar_datos
+from ..utils.helpers import cargar_datos
 
 def run():
     st.title("🍴 Restaurantes")
