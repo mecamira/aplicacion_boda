@@ -33,7 +33,7 @@ def run():
     # Ceremonia
     st.write("**Ceremonia:**")
     st.write("- **Lugar:** Iglesia San Pedro de los Arcos, Oviedo.")
-    st.write("- [Ver en Google Maps](https://www.google.com/maps/place/Iglesia+de+San+Pedro+de+los+Arcos)")
+    st.write("- [Ver en Google Maps](https://www.google.com/maps/place/Iglesia+de+San+Pedro+de+los+Arcos/@43.3672191,-5.8628094,1660m/data=!3m2!1e3!4b1!4m6!3m5!1s0xd368d023a71211f:0x17b0a2a66f4e2e75!8m2!3d43.3672153!4d-5.8579385!16s%2Fg%2F12lnh3l3y?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D)")
     try:
         imagen_iglesia = Image.open("assets/iglesia_san_pedro.jpg")
         st.image(imagen_iglesia, width=400)
@@ -43,7 +43,7 @@ def run():
     # Banquete
     st.write("**Banquete:**")
     st.write("- **Lugar:** Hotel Reconquista, Oviedo.")
-    st.write("- [Ver en Google Maps](https://www.google.com/maps/place/Hotel+Reconquista)")
+    st.write("- [Ver en Google Maps](https://www.google.com/maps/place/Eurostars+Hotel+de+La+Reconquista/@43.3630968,-5.8564535,830m/data=!3m1!1e3!4m9!3m8!1s0xd368cfd2a506959:0x5204d03f5e4695a3!5m2!4m1!1i2!8m2!3d43.3630929!4d-5.8538786!16s%2Fg%2F11b77b3hsw?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D)")
     try:
         imagen_hotel = Image.open("assets/hotel_reconquista.jpg")
         st.image(imagen_hotel, width=400)
