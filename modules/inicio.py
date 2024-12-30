@@ -12,7 +12,7 @@ def prepare_background():
 
     # Reducir la opacidad
     enhancer = ImageEnhance.Brightness(background)
-    softened_background = enhancer.enhance(0.9) 
+    softened_background = enhancer.enhance(1.5) 
     
     # Guardar la imagen modificada
     softened_path = "assets/softened_eucalyptus_background.jpg"
