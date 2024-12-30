@@ -3,6 +3,8 @@ from PIL import Image, ImageEnhance
 from datetime import datetime
 import pandas as pd
 import os
+from io import BytesIO
+import base64
 
 # Suavizar la imagen de fondo
 def prepare_background():
@@ -147,6 +149,11 @@ def run():
     st.write("[Ver en Google Maps](https://www.google.com/maps/place/Iglesia+de+San+Pedro+de+los+Arcos/@43.3672191,-5.8628094,1660m/data=!3m2!1e3!4b1!4m6!3m5!1s0xd368d023a71211f:0x17b0a2a66f4e2e75!8m2!3d43.3672153!4d-5.8579385!16s%2Fg%2F12lnh3l3y?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D)")
     try:
         imagen_iglesia = Image.open("assets/iglesia_san_pedro.jpg")
+        # Convertimos la imagen a base64
+        buffered = BytesIO()
+        imagen_iglesia.save(buffered, format="JPEG")
+        img_str = base64.b64encode(buffered.getvalue()).decode()
+        # Renderizamos la imagen circular
         st.markdown(
             f"""
             <style>
@@ -159,7 +166,7 @@ def run():
                 object-fit: cover;
             }}
             </style>
-            <img src="data:image/jpeg;base64,{base64.b64encode(imagen_iglesia.tobytes()).decode()}" class="circular-image">
+            <img src="data:image/jpeg;base64,{img_str}" class="circular-image">
             """,
             unsafe_allow_html=True
         )
@@ -172,25 +179,29 @@ def run():
     st.write("[Ver en Google Maps](https://www.google.com/maps/place/Eurostars+Hotel+de+La+Reconquista/@43.3630968,-5.8564535,830m/data=!3m1!1e3!4m9!3m8!1s0xd368cfd2a506959:0x5204d03f5e4695a3!5m2!4m1!1i2!8m2!3d43.3630929!4d-5.8538786!16s%2Fg%2F11b77b3hsw?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D)")
     try:
         imagen_hotel = Image.open("assets/hotel_reconquista.jpg")
+        # Convertimos la imagen a base64
+        buffered = BytesIO()
+        imagen_hotel.save(buffered, format="JPEG")
+        img_str = base64.b64encode(buffered.getvalue()).decode()
+        # Renderizamos la imagen circular
         st.markdown(
             f"""
-            <img src="data:image/jpeg;base64,{base64.b64encode(imagen_hotel.tobytes()).decode()}" class="circular-image">
+            <img src="data:image/jpeg;base64,{img_str}" class="circular-image">
             """,
             unsafe_allow_html=True
         )
     except FileNotFoundError:
         st.error("No se encontró la imagen del hotel. Asegúrate de que 'assets/hotel_reconquista.jpg' exista.")
-
-    # Confirmación de Asistencia
-    st.header("Confirmación de Asistencia")
-    with st.expander("Confirmar Asistencia"):
-        with st.form(key='confirmacion_asistencia'):
-            nombre = st.text_input("Nombre Completo")
-            asistencia = st.radio("¿Asistirás al evento?", ("Sí", "No"))
-            alergias = st.text_area("Alergias o Preferencias Alimenticias")
-            submit_confirmacion = st.form_submit_button("Enviar Confirmación", disabled=True)
-            if submit_confirmacion:
-                st.info("Por ahora, este formulario está bloqueado.")
+        # Confirmación de Asistencia
+        st.header("Confirmación de Asistencia")
+        with st.expander("Confirmar Asistencia"):
+            with st.form(key='confirmacion_asistencia'):
+                nombre = st.text_input("Nombre Completo")
+                asistencia = st.radio("¿Asistirás al evento?", ("Sí", "No"))
+                alergias = st.text_area("Alergias o Preferencias Alimenticias")
+                submit_confirmacion = st.form_submit_button("Enviar Confirmación", disabled=True)
+                if submit_confirmacion:
+                    st.info("Por ahora, este formulario está bloqueado.")
 
     # Mensajes y Sugerencias
     st.header("Mensajes y Sugerencias")
