@@ -6,11 +6,17 @@ import os
 
 # Aplicar estilo personalizado con fondo
 def add_background():
+    # Leer la imagen y convertirla a base64
+    import base64
+    with open("assets/eucalyptus_background.jpg", "rb") as image_file:
+        base64_image = base64.b64encode(image_file.read()).decode()
+
+    # Aplicar el fondo con CSS
     st.markdown(
         f"""
         <style>
         .stApp {{
-            background: url("assets/eucalyptus_background.jpg");
+            background-image: url("data:image/png;base64,{base64_image}");
             background-size: cover;
             background-attachment: fixed;
         }}
