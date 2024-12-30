@@ -29,12 +29,7 @@ def add_custom_styles(background_path):
     # Aplicar el fondo y estilos
     st.markdown(
         f"""
-        <style>
-        .dias-restantes {{
-            color: #8B4513; /* Marrón otoñal */
-            font-size: 10em; /* Tamaño mayor para destacar */
-            font-weight: bold; /* Negrita */
-        }}
+
         </style>
         <style>
         .stApp {{
