@@ -3,6 +3,80 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 import plotly.express as px
 
+import streamlit as st
+import pandas as pd
+import plotly.express as px
+
+# Usuarios y contraseñas
+USERS = {
+    "admin": {"password": "gus2024", "role": "Administrador"},
+    "invitado": {"password": "invitado", "role": "Invitado"},
+}
+
+# Estado de la sesión para login
+if "login" not in st.session_state:
+    st.session_state.login = False
+    st.session_state.role = None
+
+def login_user(username, password):
+    """Verifica credenciales y actualiza el estado de la sesión."""
+    if username in USERS and USERS[username]["password"] == password:
+        st.session_state.login = True
+        st.session_state.role = USERS[username]["role"]
+        st.success(f"Bienvenido, {username} ({st.session_state.role})")
+    else:
+        st.error("Usuario o contraseña incorrectos")
+
+def logout():
+    """Cierra la sesión."""
+    st.session_state.login = False
+    st.session_state.role = None
+
+# Interfaz de login
+if not st.session_state.login:
+    st.title("🔒 Login")
+    username = st.text_input("Usuario")
+    password = st.text_input("Contraseña", type="password")
+    if st.button("Iniciar sesión"):
+        login_user(username, password)
+else:
+    # Mostrar contenido según el rol
+    st.sidebar.title("📂 Opciones")
+    st.sidebar.button("Cerrar sesión", on_click=logout)
+
+    if st.session_state.role == "Administrador":
+        # Contenido para el administrador
+        st.title("👩‍💼 Panel de Administración")
+        st.write("Contenido privado solo para el Administrador.")
+
+        # Ejemplo: Gestión de gastos
+        excel_url = "https://docs.google.com/spreadsheets/d/1TjlHkjPvyxZrTy2YR2eUWjHIkSS0fcWg/export?format=xlsx"
+        data_gastos = pd.read_excel(excel_url, sheet_name="GASTOS")
+        st.markdown("### Gestión de Gastos")
+        st.dataframe(data_gastos)
+
+        # Gráfico de gastos
+        fig = px.bar(
+            data_gastos,
+            x="Concepto",
+            y=["Prevision", "Gasto Real"],
+            title="Gastos Previstos vs Reales",
+            barmode="group",
+        )
+        st.plotly_chart(fig)
+
+    elif st.session_state.role == "Invitado":
+        # Contenido para el invitado
+        st.title("🎉 Bienvenidos a la Boda")
+        st.write("Contenido público para los invitados.")
+
+        # Ejemplo: Lista de invitados
+        excel_url = "https://docs.google.com/spreadsheets/d/1TjlHkjPvyxZrTy2YR2eUWjHIkSS0fcWg/export?format=xlsx"
+        data_inv = pd.read_excel(excel_url, sheet_name="INVITADOS")
+        st.markdown("### Lista de Invitados Confirmados")
+        st.dataframe(data_inv[data_inv["Confirma"] == "Confirmado"])
+
+
 # Cargar datos desde el Excel
 excel_url = "https://docs.google.com/spreadsheets/d/1TjlHkjPvyxZrTy2YR2eUWjHIkSS0fcWg/export?format=xlsx"
 data_inv = pd.read_excel(excel_url, sheet_name="INVITADOS")
