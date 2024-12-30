@@ -49,6 +49,37 @@ def add_custom_styles(background_path):
             font-size: 60px; /* Tamaño del número */
             font-weight: bold;
         }}
+        p, label, .stMarkdown {{
+            color: #000000; /* Color negro para textos generales */
+        }}
+        .stTextInput > div > div > input {{
+            background-color: white;
+            border: 1px solid #ccc;
+            color: #000000;
+        }}
+        .stTextArea > div > textarea {{
+            background-color: white;
+            border: 1px solid #ccc;
+            color: #000000;
+        }}
+        .stRadio > div {{
+            color: #000000; /* Ajuste de opciones de radio */
+        }}
+        .stButton > button {{
+            background-color: #5A9;
+            color: white;
+            border-radius: 8px;
+            border: none;
+        }}
+        .stButton > button:disabled {{
+            background-color: #ccc;
+            color: #666;
+        }}
+        .stExpander {{
+            background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco translúcido */
+            border-radius: 8px;
+            color: #000000;
+        }}
         .separador {{
             width: 100%;
             height: 4px;
@@ -85,7 +116,7 @@ def run():
     )
 
     # Cuenta Atrás
-    fecha_boda = datetime(2026, 6, 13, 12, 0, 0)  # Fecha corregida
+    fecha_boda = datetime(2026, 6, 13, 12, 0, 0)
     dias_restantes = (fecha_boda - datetime.now()).days
 
     # Separador superior
