@@ -8,31 +8,27 @@ if "login" not in st.session_state:
     st.session_state.login = False
     st.session_state.role = None
 
-# Configuración de la barra de navegación
+# Configuración del menú principal
 menu_items = ["Inicio"]
 if st.session_state.login and st.session_state.role == "Administrador":
     menu_items.extend(["Invitados", "Gastos", "Restaurantes"])
 
+# Barra de navegación
 with st.sidebar:
     page = option_menu(
         "Navegación",
-        menu_items,
-        icons=["house", "people", "wallet", "map"],
+        menu_items if st.session_state.login else ["Inicio", "Login"],
+        icons=["house", "people", "wallet", "map", "key"],
         menu_icon="cast",
         default_index=0,
     )
 
-# Botón de login/logout en la parte superior
-with st.container():
-    st.markdown("---")
-    if st.session_state.login:
-        st.button("Cerrar sesión", on_click=logout)
-    else:
-        st.button("Identificarse", on_click=login_user)
-    st.markdown("---")
+# Página de login
+if page == "Login":
+    login_user()
 
-# Página de inicio (Visible por todos)
-if page == "Inicio":
+# Página de inicio (siempre visible)
+elif page == "Inicio":
     st.title("🎉 Bienvenidos a la Aplicación de la Boda 💍")
     st.markdown(
         """
@@ -48,46 +44,33 @@ if page == "Inicio":
     st.image("https://via.placeholder.com/800x400?text=Bienvenidos+a+la+Boda", use_container_width=True)
 
 # Página de invitados (Solo accesible por administradores)
-elif page == "Invitados":
-    if st.session_state.login and st.session_state.role == "Administrador":
-        st.title("📋 Gestión de Invitados")
-        excel_url = "https://docs.google.com/spreadsheets/d/1TjlHkjPvyxZrTy2YR2eUWjHIkSS0fcWg/export?format=xlsx"
-        data_inv = pd.read_excel(excel_url, sheet_name="INVITADOS")
-        data_inv['Estado'] = data_inv['Confirma'].fillna('Pendiente').replace('', 'Pendiente')
+elif page == "Invitados" and st.session_state.login and st.session_state.role == "Administrador":
+    st.title("📋 Gestión de Invitados")
+    excel_url = "https://docs.google.com/spreadsheets/d/1TjlHkjPvyxZrTy2YR2eUWjHIkSS0fcWg/export?format=xlsx"
+    data_inv = pd.read_excel(excel_url, sheet_name="INVITADOS")
+    data_inv['Estado'] = data_inv['Confirma'].fillna('Pendiente').replace('', 'Pendiente')
 
-        # Resumen
-        confirmados = len(data_inv[data_inv['Estado'] == 'Confirmado'])
-        pendientes = len(data_inv[data_inv['Estado'] == 'Pendiente'])
-        st.metric("Total invitados", len(data_inv))
-        st.metric("Confirmados", confirmados)
-        st.metric("Pendientes", pendientes)
-
-        # Mostrar la tabla completa
-        st.dataframe(data_inv)
-
-        # Filtro interactivo
-        filtro_estado = st.selectbox("Filtrar por estado", ["Todos", "Confirmado", "Pendiente"])
-        if filtro_estado != "Todos":
-            st.dataframe(data_inv[data_inv['Estado'] == filtro_estado])
-    else:
-        st.warning("🔒 Acceso denegado. Solo administradores pueden ver esta página.")
+    confirmados = len(data_inv[data_inv['Estado'] == 'Confirmado'])
+    pendientes = len(data_inv[data_inv['Estado'] == 'Pendiente'])
+    st.metric("Total invitados", len(data_inv))
+    st.metric("Confirmados", confirmados)
+    st.metric("Pendientes", pendientes)
+    st.dataframe(data_inv)
 
 # Página de gastos (Solo accesible por administradores)
-elif page == "Gastos":
-    if st.session_state.login and st.session_state.role == "Administrador":
-        st.title("💰 Gestión de Gastos")
-        excel_url = "https://docs.google.com/spreadsheets/d/1TjlHkjPvyxZrTy2YR2eUWjHIkSS0fcWg/export?format=xlsx"
-        data_gastos = pd.read_excel(excel_url, sheet_name="GASTOS")
-        st.dataframe(data_gastos)
-    else:
-        st.warning("🔒 Acceso denegado. Solo administradores pueden ver esta página.")
+elif page == "Gastos" and st.session_state.login and st.session_state.role == "Administrador":
+    st.title("💰 Gestión de Gastos")
+    excel_url = "https://docs.google.com/spreadsheets/d/1TjlHkjPvyxZrTy2YR2eUWjHIkSS0fcWg/export?format=xlsx"
+    data_gastos = pd.read_excel(excel_url, sheet_name="GASTOS")
+    st.dataframe(data_gastos)
 
 # Página de restaurantes (Solo accesible por administradores)
-elif page == "Restaurantes":
-    if st.session_state.login and st.session_state.role == "Administrador":
-        st.title("🍴 Restaurantes")
-        excel_url = "https://docs.google.com/spreadsheets/d/1TjlHkjPvyxZrTy2YR2eUWjHIkSS0fcWg/export?format=xlsx"
-        data_restaurantes = pd.read_excel(excel_url, sheet_name="RESTAURANTES")
-        st.dataframe(data_restaurantes)
-    else:
-        st.warning("🔒 Acceso denegado. Solo administradores pueden ver esta página.")
+elif page == "Restaurantes" and st.session_state.login and st.session_state.role == "Administrador":
+    st.title("🍴 Restaurantes")
+    excel_url = "https://docs.google.com/spreadsheets/d/1TjlHkjPvyxZrTy2YR2eUWjHIkSS0fcWg/export?format=xlsx"
+    data_restaurantes = pd.read_excel(excel_url, sheet_name="RESTAURANTES")
+    st.dataframe(data_restaurantes)
+
+# Redirigir si intenta acceder sin login
+elif not st.session_state.login and page != "Inicio":
+    st.warning("🔒 Debes iniciar sesión para acceder a esta sección.")
