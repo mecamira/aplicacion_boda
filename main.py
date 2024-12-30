@@ -1,5 +1,5 @@
 import streamlit as st
-from .utils.helpers import load_page
+from utils.helpers import load_page
 
 # Estado de sesión para el login
 if "logged_in" not in st.session_state:
