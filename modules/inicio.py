@@ -28,10 +28,12 @@ def add_custom_styles(background_path):
     with open(background_path, "rb") as image_file:
         base64_image = base64.b64encode(image_file.read()).decode()
 
-    # Aplicar el fondo y estilos
+    # Aplicar el fondo y estilos con Google Fonts
     st.markdown(
         f"""
         <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+
         .stApp {{
             background-image: url("data:image/jpg;base64,{base64_image}");
             background-size: cover;
@@ -41,41 +43,52 @@ def add_custom_styles(background_path):
             align-items: center;
             flex-direction: column;
             text-align: center; /* Centrar todo el contenido */
+            font-family: 'Dancing Script', cursive;
         }}
         h1, h2 {{
             color: #000000 !important; /* Forzar negro para encabezados */
+            font-family: 'Dancing Script', cursive; /* Cambiar estilo de fuente */
+            font-size: 2.5em;
         }}
         p, label, .stMarkdown {{
             color: #000000; /* Color negro para textos generales */
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.2em;
         }}
         .stTextInput > div > div > input {{
             background-color: white;
             border: 1px solid #ccc;
             color: #000000;
+            font-family: 'Dancing Script', cursive;
         }}
         .stTextArea > div > textarea {{
             background-color: white;
             border: 1px solid #ccc;
             color: #000000;
+            font-family: 'Dancing Script', cursive;
         }}
         .stRadio > div {{
             color: #000000; /* Ajuste de opciones de radio */
+            font-family: 'Dancing Script', cursive;
         }}
         .stButton > button {{
             background-color: #5A9;
             color: white;
             border-radius: 8px;
             border: none;
+            font-family: 'Dancing Script', cursive;
         }}
         .stButton > button:disabled {{
             background-color: #ccc;
             color: #666;
+            font-family: 'Dancing Script', cursive;
         }}
         .stExpander {{
             background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco translúcido */
             border-radius: 8px;
             color: #000000;
             box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2); /* Sombra para destacar */
+            font-family: 'Dancing Script', cursive;
         }}
         .separador {{
             width: 100%;
@@ -87,8 +100,8 @@ def add_custom_styles(background_path):
             display: block;
             margin: 0 auto;
             border-radius: 50%;
-            width: 150px; /* Ajustar tamaño */
-            height: 150px;
+            width: 350px; /* Cambiar tamaño */
+            height: 350px;
             object-fit: cover;
         }}
         </style>
@@ -157,16 +170,6 @@ def run():
         # Renderizamos la imagen circular
         st.markdown(
             f"""
-            <style>
-            .circular-image {{
-                display: block;
-                margin: 0 auto;
-                border-radius: 50%;
-                width: 350px; /* Cambiar tamaño */
-                height: 350px;
-                object-fit: cover;
-            }}
-            </style>
             <img src="data:image/jpeg;base64,{img_str}" class="circular-image">
             """,
             unsafe_allow_html=True
@@ -195,10 +198,7 @@ def run():
     except FileNotFoundError:
         st.error("No se encontró la imagen del hotel. Asegúrate de que 'assets/hotel_reconquista.jpg' exista.")
 
-    except FileNotFoundError:
-        st.error("No se encontró la imagen del hotel. Asegúrate de que 'assets/hotel_reconquista.jpg' exista.")
-        
-        # Confirmación de Asistencia
+    # Confirmación de Asistencia
     st.header("Confirmación de Asistencia")
     with st.expander("Confirmar Asistencia"):
         with st.form(key='confirmacion_asistencia'):
