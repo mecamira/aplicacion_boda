@@ -7,13 +7,21 @@ import os
 def run():
     # Encabezado Principal
     st.title("¡Estás invitado a nuestra boda! 💍")
-    
-    # Imagen Destacada
+
+    # Foto e introducción
     try:
-        imagen_iglesia = Image.open("assets/iglesia_san_pedro.jpg")
-        st.image(imagen_iglesia, use_container_width=True)
+        imagen_principal = Image.open("assets/Foto_principal.jpeg")
+        st.image(imagen_principal, use_container_width=True)
     except FileNotFoundError:
-        st.error("No se encontró la imagen de la iglesia. Asegúrate de que 'assets/iglesia_san_pedro.jpg' exista.")
+        st.error("No se encontró la imagen principal. Asegúrate de que 'assets/Foto_principal.jpeg' exista.")
+
+    st.title("¡Bienvenidos a Nuestra Boda! 💍")
+    st.markdown(
+        """
+        Esta aplicación está diseñada para ayudarte a disfrutar cada momento de nuestro día especial.
+        Explora la información del evento, confirma tu asistencia y comparte tus sugerencias. 🌸
+        """
+    )
     
     # Cuenta Atrás
     fecha_boda = datetime(2025, 6, 13, 12, 0, 0)
@@ -26,8 +34,14 @@ def run():
     st.write("**Ceremonia:**")
     st.write("- **Lugar:** Iglesia San Pedro de los Arcos, Oviedo.")
     st.write("- [Ver en Google Maps](https://www.google.com/maps/place/Iglesia+de+San+Pedro+de+los+Arcos)")
+    # Imagen Destacada
     try:
-        imagen_hotel = Image.open("assets/hotel_reconquista.jpg")
+        imagen_iglesia = Image.open("assets/iglesia_san_pedro.jpg")
+        st.image(imagen_iglesia, use_container_width=True)
+    except FileNotFoundError:
+        st.error("No se encontró la imagen de la iglesia. Asegúrate de que 'assets/iglesia_san_pedro.jpg' exista.")
+    try:
+        imagen_hotel = Image.open("assets/hotel_reconquista.avif")
         st.image(imagen_hotel, use_container_width=True)
     except FileNotFoundError:
         st.error("No se encontró la imagen del hotel. Asegúrate de que 'assets/hotel_reconquista.jpg' exista.")
