@@ -161,8 +161,8 @@ def run():
                 display: block;
                 margin: 0 auto;
                 border-radius: 50%;
-                width: 200px; /* Cambiar tamaño */
-                height: 200px;
+                width: 400px; /* Cambiar tamaño */
+                height: 400px;
                 object-fit: cover;
             }}
             </style>
