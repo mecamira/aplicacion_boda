@@ -3,7 +3,7 @@ from PIL import Image
 
 def run():
     # Cargar la imagen subida
-    imagen_principal = Image.open("/mnt/data/Foto final.jpeg")
+    imagen_principal = Image.open("assets/Foto_principal.jpeg")
 
     # Diseño de la página
     st.set_page_config(
