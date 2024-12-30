@@ -1,5 +1,6 @@
 import streamlit as st
 from utils.helpers import load_page
+import auth  # Importa las funciones de autenticación
 
 # Estado de sesión para el login
 if "logged_in" not in st.session_state:
@@ -20,13 +21,10 @@ if selected_page == "Inicio":
     load_page("modules.inicio")
 
 elif selected_page == "Login" and not st.session_state.logged_in:
-    load_page("modules.login")
+    load_page("auth")  # Cambiamos "modules.login" por "auth"
 
 elif selected_page == "Cerrar sesión" and st.session_state.logged_in:
-    st.session_state.logged_in = False
-    st.session_state.role = None
-    st.success("Has cerrado sesión correctamente.")
-    st.experimental_rerun()
+    auth.logout()
 
 elif st.session_state.logged_in:
     if selected_page == "Invitados" and st.session_state.role == "admin":
