@@ -16,11 +16,13 @@ def login_user():
         st.title("🔒 Login")
         username = st.text_input("Usuario")
         password = st.text_input("Contraseña", type="password")
+
         if st.button("Iniciar sesión"):
             if username in USERS and USERS[username]["password"] == password:
                 st.session_state.login = True
                 st.session_state.role = USERS[username]["role"]
                 st.success(f"Bienvenido, {username} ({st.session_state.role})")
+                st.experimental_rerun()  # Refresca la página automáticamente
             else:
                 st.error("Usuario o contraseña incorrectos")
         return False
