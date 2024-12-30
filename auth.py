@@ -17,22 +17,22 @@ def login_user():
     if st.session_state.login:
         return True
 
-    # Formulario de login
-    st.title("🔒 Login")
-    username = st.text_input("Usuario", key="username_input")
-    password = st.text_input("Contraseña", type="password", key="password_input")
+    # Formulario de login dentro de un contenedor
+    login_container = st.container()
+    with login_container:
+        st.title("🔒 Login")
+        username = st.text_input("Usuario", key="username_input")
+        password = st.text_input("Contraseña", type="password", key="password_input")
 
-    login_clicked = st.button("Iniciar sesión")
+        if st.button("Iniciar sesión"):
+            if username in USERS and USERS[username]["password"] == password:
+                st.session_state.login = True
+                st.session_state.role = USERS[username]["role"]
+                st.session_state.username = username
+                login_container.empty()  # Borra el formulario tras el login exitoso
+            else:
+                st.error("Usuario o contraseña incorrectos")
 
-    if login_clicked:
-        if username in USERS and USERS[username]["password"] == password:
-            st.session_state.login = True
-            st.session_state.role = USERS[username]["role"]
-            st.session_state.username = username
-        else:
-            st.error("Usuario o contraseña incorrectos")
-
-    # Controlar el flujo según el estado
     return st.session_state.login
 
 def get_role():
@@ -44,3 +44,4 @@ def logout():
     st.session_state.login = False
     st.session_state.role = None
     st.session_state.username = None
+    st.experimental_rerun()
