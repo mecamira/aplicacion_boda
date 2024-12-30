@@ -20,8 +20,8 @@ def login_user():
 
     # Formulario de login
     st.title("🔒 Login")
-    username = st.text_input("Usuario")
-    password = st.text_input("Contraseña", type="password")
+    username = st.text_input("Usuario", key="username_input")
+    password = st.text_input("Contraseña", type="password", key="password_input")
 
     # Verificar credenciales al hacer clic
     if st.button("Iniciar sesión"):
@@ -30,6 +30,8 @@ def login_user():
             st.session_state.role = USERS[username]["role"]
             st.session_state.username = username
             st.success(f"Bienvenido, {username} ({st.session_state.role})")
+            st.experimental_set_query_params()  # Limpia la URL de parámetros adicionales
+            st.empty()  # Limpia el formulario de login
             return True
         else:
             st.error("Usuario o contraseña incorrectos")
