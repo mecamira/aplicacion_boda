@@ -139,7 +139,7 @@ def run():
         
         Mientras llega el gran día, hemos creado esta app con varias secciones para que estés al día de todo. 
         
-        Una cosa importante. En la sección de Confirmar Asitencia puedes confirmar si asistirás o no, además de compartir tcualquier sugerencia que se te ocurra. Confírmanos lo antes posible, por favor, que así organizarlo todo nos será mucho más fácil. 
+        Una cosa importante. En la sección de Confirmar Asitencia puedes confirmar si asistirás o no, además de compartirnos cualquier mensaje o sugerencia. Confírmanos lo antes posible, por favor, que así organizarlo todo nos será mucho más fácil. 
         Nos vemos pronto🌸
 
         Noemi y Aleandro
