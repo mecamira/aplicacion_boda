@@ -1,14 +1,29 @@
 import streamlit as st
-from PIL import Image
+from PIL import Image, ImageEnhance
 from datetime import datetime
 import pandas as pd
 import os
 
+# Suavizar la imagen de fondo
+def prepare_background():
+    # Cargar la imagen
+    image_path = "assets/eucalyptus_background.jpg"
+    background = Image.open(image_path)
+
+    # Reducir la opacidad
+    enhancer = ImageEnhance.Brightness(background)
+    softened_background = enhancer.enhance(0.7)  # Reduce el brillo al 70%
+    
+    # Guardar la imagen modificada
+    softened_path = "assets/softened_eucalyptus_background.jpg"
+    softened_background.save(softened_path)
+    return softened_path
+
 # Aplicar estilo personalizado con fondo y textos
-def add_custom_styles():
+def add_custom_styles(background_path):
     # Leer la imagen y convertirla a base64
     import base64
-    with open("assets/eucalyptus_background.jpg", "rb") as image_file:
+    with open(background_path, "rb") as image_file:
         base64_image = base64.b64encode(image_file.read()).decode()
 
     # Aplicar el fondo y estilos
@@ -60,8 +75,11 @@ def add_custom_styles():
     )
 
 def run():
+    # Preparar el fondo suavizado
+    softened_background_path = prepare_background()
+
     # Aplicar fondo y estilos personalizados
-    add_custom_styles()
+    add_custom_styles(softened_background_path)
 
     # Encabezado Principal
     st.title("¡Estás invitado a nuestra boda! 💍")
