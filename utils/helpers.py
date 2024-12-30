@@ -9,4 +9,4 @@ def cargar_datos(sheet_name):
 def load_page(module_name):
     """Carga dinámicamente un módulo específico."""
     module = importlib.import_module(module_name)
-    module.main()
+    module.run()  # Cambiamos a `run()` en lugar de `main()`
