@@ -161,8 +161,8 @@ def run():
                 display: block;
                 margin: 0 auto;
                 border-radius: 50%;
-                width: 150px;
-                height: 150px;
+                width: 200px; /* Cambiar tamaño */
+                height: 200px;
                 object-fit: cover;
             }}
             </style>
@@ -190,6 +190,9 @@ def run():
             """,
             unsafe_allow_html=True
         )
+    except FileNotFoundError:
+        st.error("No se encontró la imagen del hotel. Asegúrate de que 'assets/hotel_reconquista.jpg' exista.")
+
     except FileNotFoundError:
         st.error("No se encontró la imagen del hotel. Asegúrate de que 'assets/hotel_reconquista.jpg' exista.")
         # Confirmación de Asistencia
