@@ -12,7 +12,7 @@ def prepare_background():
 
     # Reducir la opacidad
     enhancer = ImageEnhance.Brightness(background)
-    softened_background = enhancer.enhance(1.1) 
+    softened_background = enhancer.enhance(1.1)
     
     # Guardar la imagen modificada
     softened_path = "assets/softened_eucalyptus_background.jpg"
@@ -34,9 +34,14 @@ def add_custom_styles(background_path):
             background-image: url("data:image/jpg;base64,{base64_image}");
             background-size: cover;
             background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center; /* Centrar todo el contenido */
         }}
-        .stApp h1, .stApp h2 {{
-            color: #000000; /* Color negro para encabezados */
+        h1, h2 {{
+            color: #000000 !important; /* Forzar negro para encabezados */
         }}
         p, label, .stMarkdown {{
             color: #000000; /* Color negro para textos generales */
@@ -74,7 +79,6 @@ def add_custom_styles(background_path):
         unsafe_allow_html=True
     )
 
-
 def run():
     # Preparar el fondo suavizado
     softened_background_path = prepare_background()
@@ -100,8 +104,7 @@ def run():
     )
 
     # Cuenta Atrás
-    fecha_boda = datetime(2026, 6, 13, 12, 0, 0)  # Fecha corregida
-    # Cuenta Atrás
+    fecha_boda = datetime(2026, 6, 13, 12, 0, 0)
     dias_restantes = (fecha_boda - datetime.now()).days
 
     # Texto estilizado
@@ -119,21 +122,21 @@ def run():
 
     # Ceremonia
     st.write("**Ceremonia:**")
-    st.write("- **Lugar:** Iglesia San Pedro de los Arcos, Oviedo.")
-    st.write("- [Ver en Google Maps](https://www.google.com/maps/place/Iglesia+de+San+Pedro+de+los+Arcos/@43.3672191,-5.8628094,1660m/data=!3m2!1e3!4b1!4m6!3m5!1s0xd368d023a71211f:0x17b0a2a66f4e2e75!8m2!3d43.3672153!4d-5.8579385!16s%2Fg%2F12lnh3l3y?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D)")
+    st.write("**Lugar:** Iglesia San Pedro de los Arcos, Oviedo.")
+    st.write("[Ver en Google Maps](https://www.google.com/maps/place/Iglesia+de+San+Pedro+de+los+Arcos/@43.3672191,-5.8628094,1660m/data=!3m2!1e3!4b1!4m6!3m5!1s0xd368d023a71211f:0x17b0a2a66f4e2e75!8m2!3d43.3672153!4d-5.8579385!16s%2Fg%2F12lnh3l3y?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D)")
     try:
         imagen_iglesia = Image.open("assets/iglesia_san_pedro.jpg")
-        st.image(imagen_iglesia, width=400)
+        st.image(imagen_iglesia, use_container_width=True)
     except FileNotFoundError:
         st.error("No se encontró la imagen de la iglesia. Asegúrate de que 'assets/iglesia_san_pedro.jpg' exista.")
 
     # Banquete
     st.write("**Banquete:**")
-    st.write("- **Lugar:** Hotel Reconquista, Oviedo.")
-    st.write("- [Ver en Google Maps](https://www.google.com/maps/place/Eurostars+Hotel+de+La+Reconquista/@43.3630968,-5.8564535,830m/data=!3m1!1e3!4m9!3m8!1s0xd368cfd2a506959:0x5204d03f5e4695a3!5m2!4m1!1i2!8m2!3d43.3630929!4d-5.8538786!16s%2Fg%2F11b77b3hsw?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D)")
+    st.write("**Lugar:** Hotel Reconquista, Oviedo.")
+    st.write("[Ver en Google Maps](https://www.google.com/maps/place/Eurostars+Hotel+de+La+Reconquista/@43.3630968,-5.8564535,830m/data=!3m1!1e3!4m9!3m8!1s0xd368cfd2a506959:0x5204d03f5e4695a3!5m2!4m1!1i2!8m2!3d43.3630929!4d-5.8538786!16s%2Fg%2F11b77b3hsw?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D)")
     try:
         imagen_hotel = Image.open("assets/hotel_reconquista.jpg")
-        st.image(imagen_hotel, width=400)
+        st.image(imagen_hotel, use_container_width=True)
     except FileNotFoundError:
         st.error("No se encontró la imagen del hotel. Asegúrate de que 'assets/hotel_reconquista.jpg' exista.")
 
