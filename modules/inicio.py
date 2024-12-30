@@ -40,6 +40,9 @@ def add_custom_styles(background_path):
             flex-direction: column;
             text-align: center; /* Centrar todo el contenido */
         }}
+        h1, h2 {{
+            color: #000000; /* Negro para todos los títulos */
+        }}
         .dias-restantes {{
             color: #8B4513; /* Marrón otoñal */
             font-size: 32px; /* Texto general */
