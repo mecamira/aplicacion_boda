@@ -27,9 +27,10 @@ def login_user():
             st.session_state.login = True
             st.session_state.role = USERS[username]["role"]
             st.session_state.username = username
+            st.experimental_rerun()  # Limpia el formulario y actualiza la vista
         else:
             st.error("Usuario o contraseña incorrectos")
-    return st.session_state.login
+    return False
 
 def get_role():
     """Devuelve el rol del usuario logueado."""
@@ -40,3 +41,4 @@ def logout():
     st.session_state.login = False
     st.session_state.role = None
     st.session_state.username = None
+    st.experimental_rerun()  # Refresca automáticamente tras logout

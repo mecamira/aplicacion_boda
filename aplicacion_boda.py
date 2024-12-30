@@ -12,8 +12,8 @@ if login_user():
     with st.sidebar:
         page = option_menu(
             "Navegación",
-            ["Inicio", "Gastos", "Restaurantes"],
-            icons=["house", "wallet", "map"],
+            ["Inicio", "Invitados", "Gastos", "Restaurantes"],
+            icons=["house", "people", "wallet", "map"],
             menu_icon="cast",
             default_index=0,
         )
@@ -35,6 +35,28 @@ if login_user():
         )
         st.image("https://via.placeholder.com/800x400?text=Bienvenidos+a+la+Boda", use_container_width=True)
 
+    # Página de invitados (Solo para Administradores)
+    elif page == "Invitados" and role == "Administrador":
+        st.title("📋 Gestión de Invitados")
+        excel_url = "https://docs.google.com/spreadsheets/d/1TjlHkjPvyxZrTy2YR2eUWjHIkSS0fcWg/export?format=xlsx"
+        data_inv = pd.read_excel(excel_url, sheet_name="INVITADOS")
+        data_inv['Estado'] = data_inv['Confirma'].fillna('Pendiente').replace('', 'Pendiente')
+
+        # Resumen
+        confirmados = len(data_inv[data_inv['Estado'] == 'Confirmado'])
+        pendientes = len(data_inv[data_inv['Estado'] == 'Pendiente'])
+        st.metric("Total invitados", len(data_inv))
+        st.metric("Confirmados", confirmados)
+        st.metric("Pendientes", pendientes)
+
+        # Mostrar la tabla completa
+        st.dataframe(data_inv)
+
+        # Filtro interactivo
+        filtro_estado = st.selectbox("Filtrar por estado", ["Todos", "Confirmado", "Pendiente"])
+        if filtro_estado != "Todos":
+            st.dataframe(data_inv[data_inv['Estado'] == filtro_estado])
+
     # Página de gastos (Solo para Administradores)
     elif page == "Gastos" and role == "Administrador":
         st.title("💰 Gestión de Gastos")
@@ -52,5 +74,6 @@ if login_user():
         excel_url = "https://docs.google.com/spreadsheets/d/1TjlHkjPvyxZrTy2YR2eUWjHIkSS0fcWg/export?format=xlsx"
         data_restaurantes = pd.read_excel(excel_url, sheet_name="RESTAURANTES")
         st.dataframe(data_restaurantes)
+
 else:
     st.stop()  # Detenemos la ejecución si el usuario no está logueado
