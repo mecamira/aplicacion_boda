@@ -196,16 +196,17 @@ def run():
 
     except FileNotFoundError:
         st.error("No se encontró la imagen del hotel. Asegúrate de que 'assets/hotel_reconquista.jpg' exista.")
+        
         # Confirmación de Asistencia
-        st.header("Confirmación de Asistencia")
-        with st.expander("Confirmar Asistencia"):
-            with st.form(key='confirmacion_asistencia'):
-                nombre = st.text_input("Nombre Completo")
-                asistencia = st.radio("¿Asistirás al evento?", ("Sí", "No"))
-                alergias = st.text_area("Alergias o Preferencias Alimenticias")
-                submit_confirmacion = st.form_submit_button("Enviar Confirmación", disabled=True)
-                if submit_confirmacion:
-                    st.info("Por ahora, este formulario está bloqueado.")
+    st.header("Confirmación de Asistencia")
+    with st.expander("Confirmar Asistencia"):
+        with st.form(key='confirmacion_asistencia'):
+            nombre = st.text_input("Nombre Completo")
+            asistencia = st.radio("¿Asistirás al evento?", ("Sí", "No"))
+            alergias = st.text_area("Alergias o Preferencias Alimenticias")
+            submit_confirmacion = st.form_submit_button("Enviar Confirmación", disabled=True)
+            if submit_confirmacion:
+                st.info("Por ahora, este formulario está bloqueado.")
 
     # Mensajes y Sugerencias
     st.header("Mensajes y Sugerencias")
