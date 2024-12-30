@@ -4,7 +4,25 @@ from datetime import datetime
 import pandas as pd
 import os
 
+# Aplicar estilo personalizado con fondo
+def add_background():
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background: url("assets/eucalyptus_background.png");
+            background-size: cover;
+            background-attachment: fixed;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
 def run():
+    # Aplicar fondo
+    add_background()
+
     # Encabezado Principal
     st.title("¡Estás invitado a nuestra boda! 💍")
 
