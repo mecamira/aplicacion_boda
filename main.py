@@ -24,6 +24,7 @@ elif selected_page == "Login" and not st.session_state.logged_in:
     load_page("auth")  # Cambiamos "modules.login" por "auth"
 
 elif selected_page == "Cerrar sesión" and st.session_state.logged_in:
+    import auth
     auth.logout()
 
 elif st.session_state.logged_in:

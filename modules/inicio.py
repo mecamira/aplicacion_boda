@@ -1,16 +1,99 @@
 import streamlit as st
+from PIL import Image
 
 def run():
-    st.title("🎉 Bienvenidos a la Aplicación de la Boda 💍")
+    # Cargar la imagen subida
+    imagen_principal = Image.open("/mnt/data/Foto final.jpeg")
+
+    # Diseño de la página
+    st.set_page_config(
+        page_title="Boda de Alejandro y [Nombre de tu pareja]",
+        layout="wide"
+    )
+
+    # Banner con imagen principal
+    st.image(imagen_principal, use_column_width=True)
+
+    # Sección de bienvenida
     st.markdown(
         """
-        Esta aplicación ha sido creada para gestionar de manera eficiente todos los detalles de nuestra boda. 
-        Explora las diferentes secciones para:
-        - **Gestión de invitados**: Confirmar asistencia, verificar alérgenos y regalos.
-        - **Gastos**: Analizar y controlar el presupuesto.
-        - **Restaurantes**: Evaluar opciones de lugares para la celebración.
-        
-        ¡Esperamos que disfrutes esta experiencia tanto como nosotros al prepararla! 🎊
-        """
+        <style>
+            .titulo {
+                font-size: 3rem;
+                font-weight: bold;
+                color: #5A189A;
+                text-align: center;
+                margin-top: 20px;
+            }
+            .subtitulo {
+                font-size: 1.5rem;
+                text-align: center;
+                margin-top: 10px;
+                color: #5A189A;
+            }
+        </style>
+        <div class="titulo">¡Bienvenidos a Nuestra Boda!</div>
+        <div class="subtitulo">Organiza y disfruta cada detalle de este día tan especial 💍</div>
+        """,
+        unsafe_allow_html=True
     )
-    st.image("https://via.placeholder.com/800x400?text=Bienvenidos+a+la+Boda", use_container_width=True)
+
+    # Dividir la pantalla en columnas
+    col1, col2, col3 = st.columns([1, 2, 1])
+
+    with col2:
+        st.markdown(
+            """
+            ### ¿Qué puedes hacer aquí?
+            - **Gestionar invitados**: Confirma asistencias, verifica alérgenos y detalles.
+            - **Control de gastos**: Visualiza el presupuesto y gastos reales.
+            - **Explora restaurantes**: Elige el lugar perfecto para celebrar.
+
+            ---
+
+            ¡Todo en un solo lugar para que este día sea inolvidable! 🎊
+            """
+        )
+
+    # Accesos rápidos
+    st.markdown(
+        """
+        <style>
+            .boton {
+                display: inline-block;
+                padding: 15px 25px;
+                font-size: 16px;
+                cursor: pointer;
+                text-align: center;
+                text-decoration: none;
+                outline: none;
+                color: #fff;
+                background-color: #5A189A;
+                border: none;
+                border-radius: 15px;
+                box-shadow: 0 9px #999;
+                margin: 10px;
+            }
+
+            .boton:hover {background-color: #7B2CBF}
+
+            .boton:active {
+                background-color: #7B2CBF;
+                box-shadow: 0 5px #666;
+                transform: translateY(4px);
+            }
+
+            .botones {
+                text-align: center;
+                margin-top: 30px;
+            }
+        </style>
+        <div class="botones">
+            <a href="#" class="boton">Gestión de Invitados</a>
+            <a href="#" class="boton">Gestión de Gastos</a>
+            <a href="#" class="boton">Explorar Restaurantes</a>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
