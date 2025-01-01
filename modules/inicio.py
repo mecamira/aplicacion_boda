@@ -152,7 +152,7 @@ def run():
         <div style="font-size: 50px; /* Estilo particular de este bloque */
                     font-family: 'Dancing Script', cursive; 
                     color: #000000; text-align: center;">
-            ¡Que sí! ¡Que nos casamos! Estamos muy felices de compartir con vosotros 
+             ¡Que nos casamos! Estamos muy felices de compartir con vosotros 
             cada momento de nuestro día especial. Por eso estamos preparando una boda 
             que será para recordar.
             <br><br>
