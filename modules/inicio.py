@@ -33,6 +33,7 @@ def add_custom_styles(background_path):
         <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
 
+        /* Fondo de la app con imagen y tipografía base */
         .stApp {{
             background-image: url("data:image/jpg;base64,{base64_image}");
             background-size: cover;
@@ -41,24 +42,30 @@ def add_custom_styles(background_path):
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            text-align: center; /* Centrar todo el contenido */
+            text-align: center;
             font-family: 'Dancing Script', cursive;
         }}
+
+        /* Encabezados, con un tamaño de letra definido */
         h1 {{
-            color: #000000 !important; /* Forzar negro para encabezados */
+            color: #000000 !important;
             font-family: 'Dancing Script', cursive;
-            font-size: 64px; /* Tamaño en píxeles */
+            font-size: 64px;
         }}
         h2 {{
-            color: #000000 !important; /* Forzar negro para encabezados */
+            color: #000000 !important;
             font-family: 'Dancing Script', cursive;
-            font-size: 48px; /* Tamaño en píxeles */
+            font-size: 48px;
         }}
+
+        /* Eliminar tamaño forzado en p, label y .stMarkdown, manteniendo color y fuente */
         p, label, .stMarkdown {{
-            color: #000000; /* Color negro para textos generales */
+            color: #000000;
             font-family: 'Dancing Script', cursive;
-            /*font-size: 24px;  Tamaño en píxeles */
+            /* font-size: 24px;  <-- COMENTADO/ELIMINADO PARA NO INTERFERIR */
         }}
+
+        /* Inputs de texto */
         .stTextInput > div > div > input {{
             background-color: white;
             border: 1px solid #ccc;
@@ -72,41 +79,46 @@ def add_custom_styles(background_path):
             font-family: 'Dancing Script', cursive;
         }}
         .stRadio > div {{
-            color: #000000; /* Ajuste de opciones de radio */
+            color: #000000;
             font-family: 'Dancing Script', cursive;
         }}
+
+        /* Botones */
         .stButton > button {{
             background-color: #5A9;
             color: white;
             border-radius: 8px;
             border: none;
             font-family: 'Dancing Script', cursive;
-            font-size: 20px; /* Tamaño en píxeles */
+            font-size: 20px;
         }}
         .stButton > button:disabled {{
             background-color: #ccc;
             color: #666;
             font-family: 'Dancing Script', cursive;
         }}
+
+        /* Expander - Quitado el font-size forzado */
         .stExpander {{
-            background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco translúcido */
+            background-color: rgba(255, 255, 255, 0.9);
             border-radius: 8px;
             color: #000000;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2); /* Sombra para destacar */
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
             font-family: 'Dancing Script', cursive;
-            font-size: 24px; /* Tamaño en píxeles */
+            /* font-size: 24px;  <-- COMENTADO/ELIMINADO PARA EVITAR CONFLICTOS */
         }}
+
         .separador {{
             width: 100%;
             height: 2px;
-            background-color: #8B4513; /* Marrón otoñal */
+            background-color: #8B4513;
             margin: 8px 0;
         }}
         .circular-image {{
             display: block;
             margin: 0 auto;
             border-radius: 50%;
-            width: 350px; /* Tamaño de imagen ajustado */
+            width: 350px;
             height: 350px;
             object-fit: cover;
         }}
@@ -122,7 +134,7 @@ def run():
     # Aplicar fondo y estilos personalizados
     add_custom_styles(softened_background_path)
 
-    # Encabezado Principal (podemos dejarlo como estaba)
+    # Encabezado Principal
     st.write("N & A")
     st.write("13 de junio de 2026")
     st.title("¡Bienvenidos a nuestra boda! 💍")
@@ -137,7 +149,8 @@ def run():
     # BLOQUE 1: Introducción
     st.markdown(
         f"""
-        <div style="font-size: 18px; font-family: 'Dancing Script', cursive; 
+        <div style="font-size: 18px; /* Estilo particular de este bloque */
+                    font-family: 'Dancing Script', cursive; 
                     color: #000000; text-align: center;">
             ¡Que sí! ¡Que nos casamos! Estamos muy felices de compartir con vosotros 
             cada momento de nuestro día especial. Por eso estamos preparando una boda 
@@ -179,13 +192,12 @@ def run():
     st.markdown('<div class="separador"></div>', unsafe_allow_html=True)
 
     # Información del Evento
-    # Podemos mantener st.header como estaba para el título general
     st.header("Detalles del Evento")
 
     # BLOQUE 3: Ceremonia (con estilo propio)
     st.markdown(
         """
-        <div style="font-size: 60px !important; color: #000000; text-align: center;">
+        <div style="font-size: 60px; color: #000000; text-align: center;">
             <strong>⛪ Ceremonia:</strong><br>
             <strong>Lugar:</strong> Iglesia San Pedro de los Arcos, Oviedo.
             <br>
