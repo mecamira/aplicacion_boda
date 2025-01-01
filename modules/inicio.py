@@ -122,7 +122,7 @@ def run():
     # Aplicar fondo y estilos personalizados
     add_custom_styles(softened_background_path)
 
-    # Encabezado Principal
+    # Encabezado Principal (podemos dejarlo como estaba)
     st.write("N & A")
     st.write("13 de junio de 2026")
     st.title("¡Bienvenidos a nuestra boda! 💍")
@@ -134,14 +134,21 @@ def run():
     except FileNotFoundError:
         st.error("No se encontró la imagen principal. Asegúrate de que 'assets/Foto_principal.jpeg' exista.")
 
+    # BLOQUE 1: Introducción
     st.markdown(
         f"""
-        <div style="font-size: 18px; font-family: 'Dancing Script', cursive; color: #000000; text-align: center;">
-            ¡Que sí! ¡Que nos casamos! Estamos muy felices de compartir con vosotros cada momento de nuestro día especial. Por eso estamos preparando una boda que será para recordar.
+        <div style="font-size: 18px; font-family: 'Dancing Script', cursive; 
+                    color: #000000; text-align: center;">
+            ¡Que sí! ¡Que nos casamos! Estamos muy felices de compartir con vosotros 
+            cada momento de nuestro día especial. Por eso estamos preparando una boda 
+            que será para recordar.
             <br><br>
-            Mientras llega el gran día, hemos creado esta app con varias secciones para que estés al día de todo.
+            Mientras llega el gran día, hemos creado esta app con varias secciones 
+            para que estés al día de todo.
             <br><br>
-            Una cosa importante. En la sección de Confirmar Asistencia puedes confirmar si asistirás o no, además de compartirnos cualquier mensaje o sugerencia. Confírmanos lo antes posible, por favor, que así organizarlo todo nos será mucho más fácil.
+            Una cosa importante. En la sección de Confirmar Asistencia puedes confirmar 
+            si asistirás o no, además de compartirnos cualquier mensaje o sugerencia. 
+            Confírmanos lo antes posible, por favor, que así organizarlo todo nos será mucho más fácil.
             <br><br>
             Nos vemos pronto 🌸
             <br><br>
@@ -158,12 +165,12 @@ def run():
     # Separador superior
     st.markdown('<div class="separador"></div>', unsafe_allow_html=True)
 
-    # Texto estilizado
+    # BLOQUE 2: Cuenta atrás con estilo individual
     st.markdown(
         f"""
-        <p style="color: #8B4513; font-size: 2.0em; font-weight: bold;">
-            ¡Faltan <span style="font-size: 2.0em;">{dias_restantes}</span> días para el gran día!
-        </p>
+        <div style="color: #8B4513; font-size: 2em; font-weight: bold; text-align: center;">
+            ¡Faltan <span style="font-size: 2em;">{dias_restantes}</span> días para el gran día!
+        </div>
         """,
         unsafe_allow_html=True
     )
@@ -172,19 +179,31 @@ def run():
     st.markdown('<div class="separador"></div>', unsafe_allow_html=True)
 
     # Información del Evento
+    # Podemos mantener st.header como estaba para el título general
     st.header("Detalles del Evento")
 
-    # Ceremonia
-    st.write("**⛪ Ceremonia:**")
-    st.write("**Lugar:** Iglesia San Pedro de los Arcos, Oviedo.")
-    st.write("[Ver en Google Maps](https://www.google.com/maps/place/Iglesia+de+San+Pedro+de+los+Arcos/@43.3672191,-5.8628094,1660m/data=!3m2!1e3!4b1!4m6!3m5!1s0xd368d023a71211f:0x17b0a2a66f4e2e75!8m2!3d43.3672153!4d-5.8579385!16s%2Fg%2F12lnh3l3y?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D)")
+    # BLOQUE 3: Ceremonia (con estilo propio)
+    st.markdown(
+        """
+        <div style="font-size: 24px; color: #000000; text-align: center;">
+            <strong>⛪ Ceremonia:</strong><br>
+            <strong>Lugar:</strong> Iglesia San Pedro de los Arcos, Oviedo.
+            <br>
+            <a href="https://www.google.com/maps/place/Iglesia+de+San+Pedro+de+los+Arcos/@43.3672191,-5.8628094,1660m/data=!3m2!1e3!4b1!4m6!3m5!1s0xd368d023a71211f:0x17b0a2a66f4e2e75!8m2!3d43.3672153!4d-5.8579385!16s%2Fg%2F12lnh3l3y?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D" 
+               target="_blank" style="color: #8B4513;">
+               Ver en Google Maps
+            </a>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # Imagen de la Iglesia
     try:
         imagen_iglesia = Image.open("assets/iglesia_san_pedro.jpg")
-        # Convertimos la imagen a base64
         buffered = BytesIO()
         imagen_iglesia.save(buffered, format="JPEG")
         img_str = base64.b64encode(buffered.getvalue()).decode()
-        # Renderizamos la imagen circular
         st.markdown(
             f"""
             <img src="data:image/jpeg;base64,{img_str}" class="circular-image">
@@ -194,18 +213,28 @@ def run():
     except FileNotFoundError:
         st.error("No se encontró la imagen de la iglesia. Asegúrate de que 'assets/iglesia_san_pedro.jpg' exista.")
 
-    # Banquete
-    st.write("")    
-    st.write("**🏰 Banquete:**")
-    st.write("**Lugar:** Hotel Reconquista, Oviedo.")
-    st.write("[Ver en Google Maps](https://www.google.com/maps/place/Eurostars+Hotel+de+La+Reconquista/@43.3630968,-5.8564535,830m/data=!3m1!1e3!4m9!3m8!1s0xd368cfd2a506959:0x5204d03f5e4695a3!5m2!4m1!1i2!8m2!3d43.3630929!4d-5.8538786!16s%2Fg%2F11b77b3hsw?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D)")
+    # BLOQUE 4: Banquete (con estilo propio)
+    st.markdown(
+        """
+        <div style="font-size: 24px; color: #000000; text-align: center;">
+            <strong>🏰 Banquete:</strong><br>
+            <strong>Lugar:</strong> Hotel Reconquista, Oviedo.
+            <br>
+            <a href="https://www.google.com/maps/place/Eurostars+Hotel+de+La+Reconquista/@43.3630968,-5.8564535,830m/data=!3m1!1e3!4m9!3m8!1s0xd368cfd2a506959:0x5204d03f5e4695a3!5m2!4m1!1i2!8m2!3d43.3630929!4d-5.8538786!16s%2Fg%2F11b77b3hsw?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D" 
+               target="_blank" style="color: #8B4513;">
+               Ver en Google Maps
+            </a>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # Imagen del Hotel
     try:
         imagen_hotel = Image.open("assets/hotel_reconquista.jpg")
-        # Convertimos la imagen a base64
         buffered = BytesIO()
         imagen_hotel.save(buffered, format="JPEG")
         img_str = base64.b64encode(buffered.getvalue()).decode()
-        # Renderizamos la imagen circular
         st.markdown(
             f"""
             <img src="data:image/jpeg;base64,{img_str}" class="circular-image">
@@ -215,7 +244,7 @@ def run():
     except FileNotFoundError:
         st.error("No se encontró la imagen del hotel. Asegúrate de que 'assets/hotel_reconquista.jpg' exista.")
 
-    # Confirmación de Asistencia
+    # Confirmación de Asistencia (form en un expander)
     st.header("Confirmación de Asistencia")
     with st.expander("Confirmar Asistencia"):
         with st.form(key='confirmacion_asistencia'):
@@ -226,7 +255,7 @@ def run():
             if submit_confirmacion:
                 st.info("Por ahora, este formulario está bloqueado.")
 
-    # Mensajes y Sugerencias
+    # Mensajes y Sugerencias (form en otro expander)
     st.header("Mensajes y Sugerencias")
     with st.expander("Enviar Mensaje o Sugerencia"):
         with st.form(key='mensajes_sugerencias'):
