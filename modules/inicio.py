@@ -129,7 +129,6 @@ def add_custom_styles(background_path):
 
 def run():
 
-    st.write("VERSIÓN: PRUEBA DE HOY")
     # Preparar el fondo suavizado
     softened_background_path = prepare_background()
 
@@ -137,7 +136,7 @@ def run():
     add_custom_styles(softened_background_path)
 
     # Encabezado Principal
-    st.write("Na & A")
+    st.write("N & A")
     st.write("13 de junio de 2026")
     st.title("¡Bienvenidos a nuestra boda! 💍")
 
@@ -151,10 +150,10 @@ def run():
     # BLOQUE 1: Introducción
     st.markdown(
         f"""
-        <div style="font-size: 50px; /* Estilo particular de este bloque */
+        <div style="font-size: 18px; /* Estilo particular de este bloque */
                     font-family: 'Dancing Script', cursive; 
                     color: #000000; text-align: center;">
-            ¡Qu sí! ¡Que nos casamos! Estamos muy felices de compartir con vosotros 
+            ¡Que sí! ¡Que nos casamos! Estamos muy felices de compartir con vosotros 
             cada momento de nuestro día especial. Por eso estamos preparando una boda 
             que será para recordar.
             <br><br>
