@@ -185,7 +185,7 @@ def run():
     # BLOQUE 3: Ceremonia (con estilo propio)
     st.markdown(
         """
-        <div style="font-size: 24px; color: #000000; text-align: center;">
+        <div style="font-size: 60px; color: #000000; text-align: center;">
             <strong>⛪ Ceremonia:</strong><br>
             <strong>Lugar:</strong> Iglesia San Pedro de los Arcos, Oviedo.
             <br>
