@@ -39,7 +39,7 @@ def add_custom_styles(background_path):
 
         /* Fuerza a que h1 y h2 también tengan Dancing Script y color negro */
         h1 {{
-            font-family: 'Italic', cursive !important;
+            font-family: 'Dancing Script', cursive !important;
             font-size: 64px !important;
             color: #000000 !important;
             /* Si quieres forzar estilo "italics" añade:
