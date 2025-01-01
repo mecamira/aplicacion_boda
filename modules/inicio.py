@@ -5,33 +5,34 @@ import os
 from io import BytesIO
 import base64
 
-# 1. Función para suavizar la imagen de fondo
 def prepare_background():
+    """
+    Carga y suaviza la imagen de fondo, guardándola temporalmente.
+    """
     image_path = "assets/eucalyptus_background.jpg"
     background = Image.open(image_path)
 
-    # Ajustar brillo para que quede suave
     enhancer = ImageEnhance.Brightness(background)
     softened_background = enhancer.enhance(1.1)
 
-    # Guardar la imagen modificada
     softened_path = "assets/softened_eucalyptus_background.jpg"
     softened_background.save(softened_path)
     return softened_path
 
-# 2. Función para inyectar CSS global (fuente, color, fondo, etc.)
 def add_custom_styles(background_path):
-    # Convertir imagen de fondo a base64
+    """
+    Inyecta el fondo + estilos mínimos en la app,
+    sin forzar fuentes ni tamaños, salvo en el background y contenedores.
+    """
     with open(background_path, "rb") as image_file:
         base64_image = base64.b64encode(image_file.read()).decode()
 
-    # Inyectar estilos
     st.markdown(
         f"""
         <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
 
-        /* Fondo + tipografía y color base */
+        /* Fondo de la aplicación */
         .stApp {{
             background-image: url("data:image/jpg;base64,{base64_image}");
             background-size: cover;
@@ -40,61 +41,8 @@ def add_custom_styles(background_path):
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            text-align: center;
-            /* Tipografía y color base para toda la app */
-            font-family: 'Dancing Script', cursive;
-            color: #000000; 
-        }}
-
-        /* Opcional: puedes dejar h1, h2 con tamaño grande si quieres destacar títulos */
-        h1 {{
-            font-family: 'Dancing Script', cursive;
-            font-size: 64px;
+            text-align: center; 
             color: #000000;
-        }}
-        h2 {{
-            font-family: 'Dancing Script', cursive;
-            font-size: 48px;
-            color: #000000;
-        }}
-
-        /* No forzamos tamaño en p, label ni .stMarkdown para que no entren en conflicto
-           y así cada bloque puede usar su propio inline style si lo desea. */
-        p, label, .stMarkdown {{
-            font-family: 'Dancing Script', cursive;
-            color: #000000;
-        }}
-
-        /* Inputs de texto / radio / etc., con la misma fuente y color */
-        .stTextInput > div > div > input,
-        .stTextArea > div > textarea,
-        .stRadio > div {{
-            font-family: 'Dancing Script', cursive;
-            color: #000000;
-        }}
-
-        /* Botones */
-        .stButton > button {{
-            background-color: #5A9;
-            color: white;
-            border-radius: 8px;
-            border: none;
-            font-family: 'Dancing Script', cursive;
-            font-size: 20px; /* Ajusta si quieres */
-        }}
-        .stButton > button:disabled {{
-            background-color: #ccc;
-            color: #666;
-            font-family: 'Dancing Script', cursive;
-        }}
-
-        /* Expander */
-        .stExpander {{
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 8px;
-            color: #000000;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-            font-family: 'Dancing Script', cursive;
         }}
 
         /* Separador decorativo */
@@ -105,7 +53,7 @@ def add_custom_styles(background_path):
             margin: 1rem 0;
         }}
 
-        /* Imágenes circulares (iglesia, hotel, etc.) */
+        /* Imágenes circulares */
         .circular-image {{
             display: block;
             margin: 0 auto;
@@ -119,31 +67,32 @@ def add_custom_styles(background_path):
         unsafe_allow_html=True
     )
 
-# 3. Función principal de la página
 def run():
-    # Preparar el fondo suavizado
+    # 1. Preparar e inyectar fondo
     softened_background_path = prepare_background()
-    # Inyectar estilos globales
     add_custom_styles(softened_background_path)
 
-    # Encabezado principal (texto fijo)
-    st.write("N & A")                      # Hereda estilo base (Dancing Script, color #000)
-    st.write("13 de junio de 2026")        # Lo mismo
-    st.title("¡Bienvenidos a nuestra boda! 💍")  # Usa h1 con font-size 64px
+    # 2. Encabezado principal
+    st.write("N & A")
+    st.write("13 de junio de 2026")
+    st.title("¡Bienvenidos a nuestra boda! 💍")
 
-    # Foto principal
+    # 3. Imagen principal (si existe)
     try:
         imagen_principal = Image.open("assets/Foto_principal.jpeg")
         st.image(imagen_principal, use_container_width=True)
     except FileNotFoundError:
-        st.error("No se encontró la imagen principal en 'assets/Foto_principal.jpeg'.")
+        st.error("No se encontró la imagen principal ('assets/Foto_principal.jpeg').")
 
-    # BLOQUE 1: Introducción
-    # - Aquí, en vez de inline styles, dejamos que herede la fuente y color base.
-    # - Si quieres un tamaño concreto, lo pones: style="font-size: 24px;" por ejemplo.
+    # ==================== BLOQUE 1: Introducción ====================
     st.markdown(
         """
-        <div style="font-size: 24px; text-align: center;">
+        <div style="
+            font-size: 24px; 
+            font-family: 'Dancing Script', cursive; 
+            color: #000000; 
+            text-align: center;
+        ">
             ¡Que sí! ¡Que nos casamos! Estamos muy felices de compartir con vosotros 
             cada momento de nuestro día especial. Por eso estamos preparando una boda 
             que será para recordar.
@@ -163,33 +112,41 @@ def run():
         unsafe_allow_html=True
     )
 
-    # Cuenta atrás
+    # ==================== BLOQUE 2: Cuenta atrás ====================
     fecha_boda = datetime(2026, 6, 13, 12, 0, 0)
     dias_restantes = (fecha_boda - datetime.now()).days
 
-    # Separador decorativo
     st.markdown('<div class="separador"></div>', unsafe_allow_html=True)
 
-    # BLOQUE 2: Cuenta atrás (ejemplo de estilo inline distinto)
     st.markdown(
         f"""
-        <div style="color: #8B4513; font-size: 2em; font-weight: bold; text-align: center;">
-            ¡Faltan <span style="font-size: 2em;">{dias_restantes}</span> días para el gran día!
+        <div style="
+            font-size: 2em; 
+            font-family: 'Dancing Script', cursive; 
+            color: #8B4513; 
+            text-align: center; 
+            font-weight: bold;
+        ">
+            ¡Faltan <span style="font-size: 1.3em;">{dias_restantes}</span> días para el gran día!
         </div>
         """,
         unsafe_allow_html=True
     )
 
-    # Otro separador
     st.markdown('<div class="separador"></div>', unsafe_allow_html=True)
 
-    # Información del evento
-    st.header("Detalles del Evento")  # Usa h2 con font-size 48px
+    # ==================== Detalles del evento ====================
+    st.header("Detalles del Evento")  # Esto usa h2 de Streamlit
 
-    # BLOQUE 3: Ceremonia
+    # ------ BLOQUE 3: Ceremonia ------
     st.markdown(
         """
-        <div style="font-size: 26px; text-align: center;">
+        <div style="
+            font-size: 26px; 
+            font-family: 'Dancing Script', cursive; 
+            color: #000000; 
+            text-align: center;
+        ">
             <strong>⛪ Ceremonia:</strong><br>
             <strong>Lugar:</strong> Iglesia San Pedro de los Arcos, Oviedo.
             <br>
@@ -201,7 +158,7 @@ def run():
         """,
         unsafe_allow_html=True
     )
-    # Imagen iglesia
+
     try:
         imagen_iglesia = Image.open("assets/iglesia_san_pedro.jpg")
         buffered = BytesIO()
@@ -214,12 +171,17 @@ def run():
             unsafe_allow_html=True
         )
     except FileNotFoundError:
-        st.error("No se encontró la imagen de la iglesia. Verifica 'assets/iglesia_san_pedro.jpg'.")
+        st.error("No se encontró la imagen de la iglesia ('assets/iglesia_san_pedro.jpg').")
 
-    # BLOQUE 4: Banquete
+    # ------ BLOQUE 4: Banquete ------
     st.markdown(
         """
-        <div style="font-size: 26px; text-align: center;">
+        <div style="
+            font-size: 26px; 
+            font-family: 'Dancing Script', cursive; 
+            color: #000000; 
+            text-align: center;
+        ">
             <strong>🏰 Banquete:</strong><br>
             <strong>Lugar:</strong> Hotel Reconquista, Oviedo.
             <br>
@@ -231,7 +193,7 @@ def run():
         """,
         unsafe_allow_html=True
     )
-    # Imagen hotel
+
     try:
         imagen_hotel = Image.open("assets/hotel_reconquista.jpg")
         buffered = BytesIO()
@@ -244,9 +206,9 @@ def run():
             unsafe_allow_html=True
         )
     except FileNotFoundError:
-        st.error("No se encontró la imagen del hotel. Verifica 'assets/hotel_reconquista.jpg'.")
+        st.error("No se encontró la imagen del hotel ('assets/hotel_reconquista.jpg').")
 
-    # Confirmación de asistencia
+    # ==================== Confirmación de Asistencia ====================
     st.header("Confirmación de Asistencia")
     with st.expander("Confirmar Asistencia"):
         with st.form(key='confirmacion_asistencia'):
@@ -257,7 +219,7 @@ def run():
             if submit_confirmacion:
                 st.info("Por ahora, este formulario está bloqueado.")
 
-    # Mensajes y sugerencias
+    # ==================== Mensajes y Sugerencias ====================
     st.header("Mensajes y Sugerencias")
     with st.expander("Enviar Mensaje o Sugerencia"):
         with st.form(key='mensajes_sugerencias'):
@@ -267,6 +229,5 @@ def run():
             if submit_mensaje:
                 st.info("Por ahora, este formulario está bloqueado.")
 
-# Llamada principal (si se ejecuta este script directamente)
 if __name__ == "__main__":
     run()
