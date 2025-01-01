@@ -5,34 +5,33 @@ import os
 from io import BytesIO
 import base64
 
+# 1. Función para suavizar la imagen de fondo
 def prepare_background():
-    """
-    Carga y suaviza la imagen de fondo, guardándola temporalmente.
-    """
     image_path = "assets/eucalyptus_background.jpg"
     background = Image.open(image_path)
 
+    # Ajustar brillo para que quede suave
     enhancer = ImageEnhance.Brightness(background)
     softened_background = enhancer.enhance(1.1)
 
+    # Guardar la imagen modificada
     softened_path = "assets/softened_eucalyptus_background.jpg"
     softened_background.save(softened_path)
     return softened_path
 
+# 2. Función para inyectar CSS global (fuente, color, fondo, etc.)
 def add_custom_styles(background_path):
-    """
-    Inyecta el fondo + estilos mínimos en la app,
-    sin forzar fuentes ni tamaños, salvo en el background y contenedores.
-    """
+    # Convertir imagen de fondo a base64
     with open(background_path, "rb") as image_file:
         base64_image = base64.b64encode(image_file.read()).decode()
 
+    # Inyectar estilos
     st.markdown(
         f"""
         <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
 
-        /* Fondo de la aplicación */
+        /* Fondo + tipografía y color base */
         .stApp {{
             background-image: url("data:image/jpg;base64,{base64_image}");
             background-size: cover;
@@ -41,8 +40,61 @@ def add_custom_styles(background_path):
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            text-align: center; 
+            text-align: center;
+            /* Tipografía y color base para toda la app */
+            font-family: 'Dancing Script', cursive;
+            color: #000000; 
+        }}
+
+        /* Opcional: puedes dejar h1, h2 con tamaño grande si quieres destacar títulos */
+        h1 {{
+            font-family: 'Dancing Script', cursive;
+            font-size: 64px;
             color: #000000;
+        }}
+        h2 {{
+            font-family: 'Dancing Script', cursive;
+            font-size: 48px;
+            color: #000000;
+        }}
+
+        /* No forzamos tamaño en p, label ni .stMarkdown para que no entren en conflicto
+           y así cada bloque puede usar su propio inline style si lo desea. */
+        p, label, .stMarkdown {{
+            font-family: 'Dancing Script', cursive;
+            color: #000000;
+        }}
+
+        /* Inputs de texto / radio / etc., con la misma fuente y color */
+        .stTextInput > div > div > input,
+        .stTextArea > div > textarea,
+        .stRadio > div {{
+            font-family: 'Dancing Script', cursive;
+            color: #000000;
+        }}
+
+        /* Botones */
+        .stButton > button {{
+            background-color: #5A9;
+            color: white;
+            border-radius: 8px;
+            border: none;
+            font-family: 'Dancing Script', cursive;
+            font-size: 20px; /* Ajusta si quieres */
+        }}
+        .stButton > button:disabled {{
+            background-color: #ccc;
+            color: #666;
+            font-family: 'Dancing Script', cursive;
+        }}
+
+        /* Expander */
+        .stExpander {{
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            color: #000000;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            font-family: 'Dancing Script', cursive;
         }}
 
         /* Separador decorativo */
@@ -53,7 +105,7 @@ def add_custom_styles(background_path):
             margin: 1rem 0;
         }}
 
-        /* Imágenes circulares */
+        /* Imágenes circulares (iglesia, hotel, etc.) */
         .circular-image {{
             display: block;
             margin: 0 auto;
@@ -67,6 +119,7 @@ def add_custom_styles(background_path):
         unsafe_allow_html=True
     )
 
+# 3. Función principal de la página
 def run():
     # 1. Preparar e inyectar fondo
     softened_background_path = prepare_background()
