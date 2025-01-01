@@ -5,33 +5,25 @@ import os
 from io import BytesIO
 import base64
 
-# 1. Función para suavizar la imagen de fondo
 def prepare_background():
     image_path = "assets/eucalyptus_background.jpg"
     background = Image.open(image_path)
-
-    # Ajustar brillo para que quede suave
     enhancer = ImageEnhance.Brightness(background)
     softened_background = enhancer.enhance(1.1)
-
-    # Guardar la imagen modificada
     softened_path = "assets/softened_eucalyptus_background.jpg"
     softened_background.save(softened_path)
     return softened_path
 
-# 2. Función para inyectar CSS global (fuente, color, fondo, etc.)
 def add_custom_styles(background_path):
-    # Convertir imagen de fondo a base64
     with open(background_path, "rb") as image_file:
         base64_image = base64.b64encode(image_file.read()).decode()
 
-    # Inyectar estilos
     st.markdown(
         f"""
         <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
 
-        /* Fondo + tipografía y color base */
+        /* Fondo + tipografía y color base para la app */
         .stApp {{
             background-image: url("data:image/jpg;base64,{base64_image}");
             background-size: cover;
@@ -41,31 +33,32 @@ def add_custom_styles(background_path):
             align-items: center;
             flex-direction: column;
             text-align: center;
-            /* Tipografía y color base para toda la app */
             font-family: 'Dancing Script', cursive;
-            color: #000000; 
+            color: #000000;
         }}
 
-        /* Opcional: puedes dejar h1, h2 con tamaño grande si quieres destacar títulos */
+        /* Fuerza a que h1 y h2 también tengan Dancing Script y color negro */
         h1 {{
-            font-family: 'Dancing Script', cursive;
-            font-size: 64px;
-            color: #000000;
+            font-family: 'Dancing Script', cursive !important;
+            font-size: 64px !important;
+            color: #000000 !important;
+            /* Si quieres forzar estilo "italics" añade:
+               font-style: italic !important;
+            */
         }}
         h2 {{
-            font-family: 'Dancing Script', cursive;
-            font-size: 48px;
-            color: #000000;
+            font-family: 'Dancing Script', cursive !important;
+            font-size: 48px !important;
+            color: #000000 !important;
         }}
 
-        /* No forzamos tamaño en p, label ni .stMarkdown para que no entren en conflicto
-           y así cada bloque puede usar su propio inline style si lo desea. */
+        /* El resto (p, label, .stMarkdown) solo fuerza tipografía y color, sin tamaño */
         p, label, .stMarkdown {{
             font-family: 'Dancing Script', cursive;
             color: #000000;
         }}
 
-        /* Inputs de texto / radio / etc., con la misma fuente y color */
+        /* Inputs de texto / radio */
         .stTextInput > div > div > input,
         .stTextArea > div > textarea,
         .stRadio > div {{
@@ -80,7 +73,7 @@ def add_custom_styles(background_path):
             border-radius: 8px;
             border: none;
             font-family: 'Dancing Script', cursive;
-            font-size: 20px; /* Ajusta si quieres */
+            font-size: 20px;
         }}
         .stButton > button:disabled {{
             background-color: #ccc;
@@ -105,7 +98,7 @@ def add_custom_styles(background_path):
             margin: 1rem 0;
         }}
 
-        /* Imágenes circulares (iglesia, hotel, etc.) */
+        /* Imágenes circulares */
         .circular-image {{
             display: block;
             margin: 0 auto;
@@ -119,25 +112,24 @@ def add_custom_styles(background_path):
         unsafe_allow_html=True
     )
 
-# 3. Función principal de la página
 def run():
-    # 1. Preparar e inyectar fondo
+    # Inyectamos fondo y estilos
     softened_background_path = prepare_background()
     add_custom_styles(softened_background_path)
 
-    # 2. Encabezado principal
-    st.write("N & A")
-    st.write("13 de junio de 2026")
-    st.title("¡Bienvenidos a nuestra boda! 💍")
+    # Encabezado principal
+    st.write("N & A")  # Hereda Dancing Script + color #000
+    st.write("13 de junio de 2026")  
+    st.title("¡Bienvenidos a nuestra boda! 💍")  # <h1> con Dancing Script
 
-    # 3. Imagen principal (si existe)
+    # Imagen principal
     try:
         imagen_principal = Image.open("assets/Foto_principal.jpeg")
         st.image(imagen_principal, use_container_width=True)
     except FileNotFoundError:
         st.error("No se encontró la imagen principal ('assets/Foto_principal.jpeg').")
 
-    # ==================== BLOQUE 1: Introducción ====================
+    # BLOQUE 1: Introducción
     st.markdown(
         """
         <div style="
@@ -165,7 +157,7 @@ def run():
         unsafe_allow_html=True
     )
 
-    # ==================== BLOQUE 2: Cuenta atrás ====================
+    # BLOQUE 2: Cuenta atrás
     fecha_boda = datetime(2026, 6, 13, 12, 0, 0)
     dias_restantes = (fecha_boda - datetime.now()).days
 
@@ -188,10 +180,10 @@ def run():
 
     st.markdown('<div class="separador"></div>', unsafe_allow_html=True)
 
-    # ==================== Detalles del evento ====================
-    st.header("Detalles del Evento")  # Esto usa h2 de Streamlit
+    # Detalles del evento
+    st.header("Detalles del Evento")  # <h2> con Dancing Script
 
-    # ------ BLOQUE 3: Ceremonia ------
+    # Ceremonia
     st.markdown(
         """
         <div style="
@@ -203,7 +195,7 @@ def run():
             <strong>⛪ Ceremonia:</strong><br>
             <strong>Lugar:</strong> Iglesia San Pedro de los Arcos, Oviedo.
             <br>
-            <a href="https://www.google.com/maps/place/Iglesia+de+San+Pedro+de+los+Arcos/@43.3672191,-5.8628094,1660m/data=!3m2!1e3!4b1!4m6!3m5!1s0xd368d023a71211f:0x17b0a2a66f4e2e75!8m2!3d43.3672153!4d-5.8579385!16s%2Fg%2F12lnh3l3y?entry=ttu" 
+            <a href="https://www.google.com/maps/place/Iglesia+de+San+Pedro+de+los+Arcos/..." 
                target="_blank" style="color: #8B4513;">
                Ver en Google Maps
             </a>
@@ -224,9 +216,9 @@ def run():
             unsafe_allow_html=True
         )
     except FileNotFoundError:
-        st.error("No se encontró la imagen de la iglesia ('assets/iglesia_san_pedro.jpg').")
+        st.error("No se encontró la imagen de la iglesia.")
 
-    # ------ BLOQUE 4: Banquete ------
+    # Banquete
     st.markdown(
         """
         <div style="
@@ -238,7 +230,7 @@ def run():
             <strong>🏰 Banquete:</strong><br>
             <strong>Lugar:</strong> Hotel Reconquista, Oviedo.
             <br>
-            <a href="https://www.google.com/maps/place/Eurostars+Hotel+de+La+Reconquista/@43.3630968,-5.8564535,830m/data=!3m1!1e3!4m9!3m8!1s0xd368cfd2a506959:0x5204d03f5e4695a3!5m2!4m1!1i2!8m2!3d43.3630929!4d-5.8538786!16s%2Fg%2F11b77b3hsw?entry=ttu" 
+            <a href="https://www.google.com/maps/place/Eurostars+Hotel+de+La+Reconquista/..." 
                target="_blank" style="color: #8B4513;">
                Ver en Google Maps
             </a>
@@ -259,9 +251,9 @@ def run():
             unsafe_allow_html=True
         )
     except FileNotFoundError:
-        st.error("No se encontró la imagen del hotel ('assets/hotel_reconquista.jpg').")
+        st.error("No se encontró la imagen del hotel.")
 
-    # ==================== Confirmación de Asistencia ====================
+    # Confirmación de asistencia
     st.header("Confirmación de Asistencia")
     with st.expander("Confirmar Asistencia"):
         with st.form(key='confirmacion_asistencia'):
@@ -272,7 +264,7 @@ def run():
             if submit_confirmacion:
                 st.info("Por ahora, este formulario está bloqueado.")
 
-    # ==================== Mensajes y Sugerencias ====================
+    # Mensajes y Sugerencias
     st.header("Mensajes y Sugerencias")
     with st.expander("Enviar Mensaje o Sugerencia"):
         with st.form(key='mensajes_sugerencias'):
