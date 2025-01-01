@@ -6,6 +6,9 @@ import os
 from io import BytesIO
 import base64
 
+st.write("VERSIÓN: PRUEBA DE HOY")
+
+
 # Suavizar la imagen de fondo
 def prepare_background():
     # Cargar la imagen
