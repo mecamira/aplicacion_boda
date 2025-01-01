@@ -137,7 +137,7 @@ def run():
     add_custom_styles(softened_background_path)
 
     # Encabezado Principal
-    st.write("N & A")
+    st.write("Na & A")
     st.write("13 de junio de 2026")
     st.title("¡Bienvenidos a nuestra boda! 💍")
 
