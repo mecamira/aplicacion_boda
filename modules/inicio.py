@@ -6,9 +6,6 @@ import os
 from io import BytesIO
 import base64
 
-st.write("VERSIÓN: PRUEBA DE HOY")
-
-
 # Suavizar la imagen de fondo
 def prepare_background():
     # Cargar la imagen
@@ -131,6 +128,8 @@ def add_custom_styles(background_path):
     )
 
 def run():
+
+    st.write("VERSIÓN: PRUEBA DE HOY")
     # Preparar el fondo suavizado
     softened_background_path = prepare_background()
 
