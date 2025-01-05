@@ -195,7 +195,7 @@ def run():
             <strong>⛪ Ceremonia:</strong><br>
             <strong>Lugar:</strong> Iglesia San Pedro de los Arcos, Oviedo.
             <br>
-            <a href="https://www.google.com/maps/place/Iglesia+de+San+Pedro+de+los+Arcos/..." 
+            <a href="https://www.google.com/maps/place/Iglesia+de+San+Pedro+de+los+Arcos/@43.3672192,-5.8605134,1660m/data=!3m2!1e3!4b1!4m6!3m5!1s0xd368d023a71211f:0x17b0a2a66f4e2e75!8m2!3d43.3672153!4d-5.8579385!16s%2Fg%2F12lnh3l3y?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D" 
                target="_blank" style="color: #8B4513;">
                Ver en Google Maps
             </a>
@@ -228,7 +228,7 @@ def run():
             text-align: center;
         ">
             <strong>🏰 Banquete:</strong><br>
-            <strong>Lugar:</strong> Palacio de Villabona, Oviedo.
+            <strong>Lugar:</strong> Palacio de Villabona, Llanera.
             <br>
             <a href="https://www.google.es/maps/place/Palacio+de+Villabona/@43.4622896,-5.8373044,17z/data=!3m1!4b1!4m6!3m5!1s0xd368f3a9c000001:0x95b6e22a5d2bb121!8m2!3d43.4622858!4d-5.8324335!16s%2Fg%2F1218f4ry?hl=es&entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D" 
                target="_blank" style="color: #8B4513;">
@@ -240,7 +240,7 @@ def run():
     )
 
     try:
-        imagen_hotel = Image.open("assets/palacio_viallabona.jpeg")
+        imagen_hotel = Image.open("assets/palacio_viallabona.jpg")
         buffered = BytesIO()
         imagen_hotel.save(buffered, format="JPEG")
         img_str = base64.b64encode(buffered.getvalue()).decode()
