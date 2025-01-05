@@ -240,7 +240,7 @@ def run():
     )
 
     try:
-        imagen_hotel = Image.open("assets/palacio_viallabona.jpg")
+        imagen_hotel = Image.open("assets/palacio_villabona.jpeg")
         buffered = BytesIO()
         imagen_hotel.save(buffered, format="JPEG")
         img_str = base64.b64encode(buffered.getvalue()).decode()
