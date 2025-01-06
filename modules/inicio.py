@@ -119,7 +119,7 @@ def run():
 
     # Encabezado principal
     st.write("N & A")  # Hereda Dancing Script + color #000
-    st.write("13 de junio de 2026")  
+    st.write("20 de junio de 2026")  
     st.title("¡Bienvenidos a nuestra boda! 💍")  # <h1> con Dancing Script
 
     # Imagen principal
